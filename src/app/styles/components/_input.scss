@@ -1,0 +1,86 @@
+@use "../variables/variables.scss" as variables;
+@use "../mixins/mixins.scss" as mixins;
+
+.input {
+    padding: variables.$spacing_sm;
+    width: 100%;
+    max-width: 392px;
+    border-radius: variables.$spacing_3xs;
+    position: relative;
+    margin: 0 0 26px;
+    &.error {
+        margin: 0 0 40px;
+    }
+    &__label {
+        @include mixins.typography(medium_b1);
+        color: variables.$gray-50;
+        display: none;
+        &.error {
+            color: variables.$red-100;
+        }
+    }
+    &__field {
+        width: 100%;
+        border: none;
+        outline: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: variables.$spacing_lg variables.$spacing_sm;
+        border-radius: variables.$spacing_3xs;
+        background-color: transparent;
+        border: 1px solid variables.$gray-50;
+        &:focus {
+            border: 1px solid variables.$blue-40;
+        }
+        &:not(:placeholder-shown) ~ .input__label {
+            display: block;
+            position: absolute;
+            color: variables.$gray-50;
+            animation: input-label-focus 400ms forwards;
+            background-color: variables.$white-100;
+            @include mixins.typography(medium_sd);
+            padding: 0 variables.$spacing_3xs;
+        }
+        &:not(:placeholder-shown) {
+            border: 1px solid variables.$blue-40;
+        }
+        &.error {
+            border: 1px solid variables.$red-100;
+        }
+        &.error:not(:placeholder-shown) ~ .input__label {
+            color: variables.$red-100;
+        }
+
+    }
+    &__error {
+        display: none;
+        position: absolute;
+        top: 50px;
+        @include mixins.typography(regular_sd);
+        color: variables.$red-100;
+        &.show {
+            display: block;
+        }
+    }
+}
+
+@keyframes input-label-focus {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-24px);
+    }
+}
+
+@keyframes input-label-blur {
+    0% {
+        transform: translateY(-24px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,4 @@
+@use "./colors.scss" as colors;
+
+$shadow-10: 0px 4px 4px -4px colors.$black-10;
+$shadow-20: 0px 16px 32px -4px colors.$black-20;

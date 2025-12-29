@@ -20,6 +20,10 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "externalDependencies": [
+              "fonts/*",
+              "img/*"
+            ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",

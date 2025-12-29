@@ -1,0 +1,21 @@
+@use "../variables/variables.scss" as variables;
+@use "../mixins/mixins.scss" as mixins;
+
+.option {
+    padding: variables.$spacing_2xl;
+    width: 100%;
+    max-width: 396px;
+    border-radius: variables.$spacing_2xs;
+    border: 1px solid variables.$black-10;
+    background-color: variables.$white-100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: variables.$spacing_sm;
+    cursor: pointer;
+    @include mixins.typography(semibold_b2);
+    &.selected {
+        border: 2px solid variables.$blue-40;
+    }
+}

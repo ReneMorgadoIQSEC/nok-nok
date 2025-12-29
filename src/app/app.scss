@@ -1,0 +1,19 @@
+// Fonts
+@use "./styles/fonts/fonts.scss" as *;
+@use "./styles/components/components.scss" as *;
+@use "./styles/variables/variables.scss" as *;
+@use "./styles/mixins/mixins.scss" as *;
+
+* {
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, ol, ul, li, form, legend, label, table, header, footer, nav, section, figure {
+	margin: 0;
+	padding: 0;
+}
+
+header, footer, nav, section, article, figure {
+	display: block;
+}

@@ -1,0 +1,22 @@
+@use "./colors.scss" as colors;
+
+$buttons: (
+  primary: (
+    background: colors.$blue-40,
+    color: colors.$white-90,
+    background-disabled: colors.$gray-20,
+    color-disabled: colors.$gray-30,
+  ),
+  secondary: (
+    background: colors.$blue-100,
+    color: colors.$white-100,
+    background-disabled: colors.$gray-20,
+    color-disabled: colors.$gray-30,
+  ),
+  link: (
+    background: transparent,
+    color: colors.$blue-30,
+    background-disabled: transparent,
+    color-disabled: colors.$gray-30,
+  ),
+);

@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "sass:string";
+@use "../variables/breakpoints.scss" as breakpoints;
+
+
+@mixin media($condition) {
+	$operator: string.slice($condition, 1, 1);
+	$breakpoint: string.slice($condition, 2);
+
+	@if map.has-key(breakpoints.$breakpoints, $breakpoint) {
+		$bp-value: map.get(breakpoints.$breakpoints, $breakpoint);
+
+		@if $operator=='>' {
+			@media (min-width: $bp-value) {
+				@content;
+			}
+		}
+
+		@else if $operator=='<' {
+			@media (max-width: ($bp-value - 1)) {
+				@content;
+			}
+		}
+	}
+
+	@else {
+		@warn "El breakpoint '#{$breakpoint}' no está definido en el mapa de breakpoints.";
+	}
+}

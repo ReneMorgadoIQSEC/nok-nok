@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "../variables/typography.scss" as typography;
+
+@mixin typography($key) {
+    @if map.has-key(typography.$typography, $key) {
+        $values: map.get(typography.$typography, $key);
+        font-size: map.get($values, size);
+        font-weight: map.get($values, weight);
+        line-height: map.get($values, line-height);
+        font-family: "Poppins";
+    }
+
+    @else {
+        @warn "La clave `#{$key}` no existe en el mapa de tipografía.";
+    }
+}
