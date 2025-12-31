@@ -3,6 +3,7 @@
 @use "./styles/components/components.scss" as *;
 @use "./styles/variables/variables.scss" as *;
 @use "./styles/mixins/mixins.scss" as *;
+@use "./styles/layouts/layouts.scss" as *;
 
 * {
     box-sizing: border-box;
