@@ -37,6 +37,9 @@ button {
                 background-color: map.get($styles, background-disabled);
                 border: none;
                 color: map.get($styles, color-disabled);
+                & img {
+                    filter: brightness(0.7);
+                }
             }
             &:hover {
                 transform: scale(0.98);

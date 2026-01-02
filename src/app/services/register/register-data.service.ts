@@ -16,21 +16,27 @@ export class RegisterDataService {
         name: '',
         email: '',
         phone: '',
+        completed: false,
       },
-    passkey: {
-      example: '',
-    },
-    otp: {
-      verified: false,
-    },
-    askAntispoofing: {
-      chosenAntispoofing: false,
-    },
-    antispoofing: {
-      verified: false,
-    },
-    currentStep: RegisterSteps.DATA,
-  }};
+      passkey: {
+        example: '',
+        completed: false,
+      },
+      otp: {
+        verified: false,
+        completed: false,
+      },
+      askAntispoofing: {
+        chosenAntispoofing: false,
+        completed: false,
+      },
+      antispoofing: {
+        verified: false,
+        completed: false,
+      },
+      currentStep: RegisterSteps.DATA,
+    }
+  };
 
   get state(): RegisterData {
     return this._state$.value;
@@ -40,8 +46,8 @@ export class RegisterDataService {
     this._state$.next(this.getEmptyState());
   }
 
-  updateCurrentStep(step: RegisterSteps) {
-    const newState = { ...this.state, currentStep: step } as RegisterData;
+  updateCurrentStep(step: RegisterSteps, data?: Record<string, any>) {
+    const newState = { ...this.state, currentStep: step, ...data } as RegisterData;
     this._state$.next(newState);
     this.onStepChange.next(step);
   }
@@ -50,7 +56,7 @@ export class RegisterDataService {
     return this.state.currentStep;
   }
 
-  getStepData(step: RegisterSteps): DataStep | PasskeyStep | OtpStep | AskAntispoofingStep | AntispoofingStep {
+  getStepData(step: RegisterSteps) {
     return this.state[step];
   }
 }

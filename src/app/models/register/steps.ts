@@ -19,20 +19,25 @@ export interface DataStep {
     name: string;
     email: string;
     phone?: string;
+    completed: boolean;
 }
 
 export interface PasskeyStep {
     example: string;
+    completed: boolean;
 }
 
 export interface OtpStep {
     verified: boolean;
+    completed: boolean;
 }
 
 export interface AskAntispoofingStep {
     chosenAntispoofing: boolean;
+    completed: boolean;
 }
 
 export interface AntispoofingStep {
     verified: boolean;
+    completed: boolean;
 }

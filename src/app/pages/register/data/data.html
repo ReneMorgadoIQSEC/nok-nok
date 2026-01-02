@@ -1,1 +1,22 @@
-<p>data works!</p>
+<div class="StepData">
+    <p class="StepData__title">Crear cuenta</p>
+    <p class="StepData__subtitle">Ingresa los siguientes datos.</p>
+    <form class="StepData__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input">
+            <input [appRestrictInput]="'[A-Za-zÁÉÍÓÚáéíóúÑñÜü\\s]'" [ngClass]="{'error': (form.get('name')?.errors?.['required'] || form.get('name')?.errors?.['minlength']) && form.get('name')?.touched}" [maxLength]="100" formControlName="name" type="text" class="input__field" id="input" name="input" placeholder="Nombre">
+            <label for="input" class="input__label">Nombre</label>
+            <span class="input__error" [ngClass]="{'show': (form.get('name')?.errors?.['required'] || form.get('name')?.errors?.['minlength']) && form.get('name')?.touched}">Ingrese un nombre válido</span>
+        </div>  
+        <div class="input">
+            <input formControlName="email" type="text" class="input__field" id="email" [ngClass]="{'error': (form.get('email')?.errors?.['required'] || form.get('email')?.errors?.['email']) && form.get('email')?.touched}" name="email" placeholder="Correo electrónico">
+            <label for="email" class="input__label">Correo electrónico</label>
+            <span class="input__error" [ngClass]="{'show': (form.get('email')?.errors?.['required'] || form.get('email')?.errors?.['email']) && form.get('email')?.touched}">Ingrese un correo electrónico válido</span>
+        </div>
+        <div class="input">
+            <input [appRestrictInput]="'^[0-9]*$'" [maxLength]="10" formControlName="phone" type="tel" class="input__field" id="phone" [ngClass]="{'error': form.get('phone')?.errors?.['pattern'] || form.get('phone')?.errors?.['maxlength'] || form.get('phone')?.errors?.['minlength']} " name="input" placeholder="Número telefónico (opcional)">
+            <label for="phone" class="input__label">Número telefónico (opcional)</label>
+            <span class="input__error" [ngClass]="{'show': form.get('phone')?.errors?.['pattern'] || form.get('phone')?.errors?.['maxlength'] || form.get('phone')?.errors?.['minlength']}">Ingrese un número telefónico válido</span>
+        </div>
+        <button class="button button__primary" type="submit" [disabled]="form.invalid">Siguiente <img src="images/next.svg" alt="arrow-right"></button>
+    </form>
+</div>

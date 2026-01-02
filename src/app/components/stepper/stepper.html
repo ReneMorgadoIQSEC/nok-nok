@@ -1,0 +1,6 @@
+<div class="stepper">
+    <div class="stepper__step" [ngClass]="{'active': i <= currentStep}" *ngFor="let step of steps; let i = index">
+        <div class="stepper__number">0{{ i + 1 }}</div>
+        <div class="stepper__label">{{ step }}</div>
+    </div>
+</div>

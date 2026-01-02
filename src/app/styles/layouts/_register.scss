@@ -25,4 +25,11 @@
             justify-content: center;
         }
     }
+    &__main {
+        width: 100%;
+        max-width: 816px;
+        margin: variables.$spacing_14xl auto;
+        display: flex;
+        flex-direction: column;
+    }
 }
