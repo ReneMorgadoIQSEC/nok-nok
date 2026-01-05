@@ -23,7 +23,6 @@ export interface DataStep {
 }
 
 export interface PasskeyStep {
-    example: string;
     completed: boolean;
 }
 

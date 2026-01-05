@@ -19,7 +19,6 @@ export class RegisterDataService {
         completed: false,
       },
       passkey: {
-        example: '',
         completed: false,
       },
       otp: {

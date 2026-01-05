@@ -5,6 +5,10 @@
     margin: 0;
     padding: 0;
     border: none;
+    display: none;
+    &.open {
+        display: block;
+    }
     &_backdrop{
         background-color: variables.$black-50;
         content: "";

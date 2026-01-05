@@ -1,5 +1,32 @@
 <div class="StepPasskey">
-    <p class="StepPasskey__title">Crear cuenta</p>
-    <p class="StepPasskey__subtitle">Para que puedas iniciar sesión de forma rápida y segura, crearemos un <strong>Passkey</strong> vinculado a tu dispositivo. Este método es más seguro que una contraseña tradicional.</p>
-    
+  <p class="StepPasskey__title">Crear cuenta</p>
+  <p class="StepPasskey__subtitle">
+    Para que puedas iniciar sesión de forma rápida y segura, crearemos un
+    <strong>Passkey</strong> vinculado a tu dispositivo. Este método es más seguro que una
+    contraseña tradicional.
+  </p>
+  <img src="images/passkey.svg" alt="passkey" class="StepPasskey__image" />
+  <button class="button button__primary StepPasskey__button" (click)="onContinue()">
+    Siguiente<img src="images/next.svg" alt="arrow right" class="button__icon" />
+  </button>
+  <div class="dialog" [class.open]="openLoader">
+    <div class="dialog_backdrop"></div>
+    <div class="dialog__content">
+      <div class="StepPasskey__modal">
+        <img src="images/loader_phone.gif" alt="passkey" class="StepPasskey__modal__image" />
+        <p class="StepPasskey__modal__title">Creando Passkey</p>
+        <p class="StepPasskey__modal__subtitle">Espera un momento, por favor...</p>
+      </div>
+    </div>
+  </div>
+  <div class="dialog" [class.open]="showError">
+    <div class="dialog_backdrop"></div>
+    <div class="dialog__content">
+      <div class="StepPasskey__modal">
+        <img src="images/unplug.svg" alt="error" class="StepPasskey__modal__image" />
+        <p class="StepPasskey__modal__title">Error</p>
+        <p class="StepPasskey__modal__subtitle">{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
 </div>
