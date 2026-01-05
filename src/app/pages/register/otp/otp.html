@@ -1,1 +1,13 @@
-<p>otp works!</p>
+<div class="StepOtp">
+  <p class="StepOtp__title">Crear cuenta</p>
+  <p class="StepOtp__subtitle">
+    Te enviaremos un <strong>código de verificación</strong> a tus medios de contacto
+    registrados.<br />
+    Ingresa el código en la <strong>siguiente pantalla</strong> para continuar con
+    tu proceso de registro.
+  </p>
+  <img src="images/2fa.svg" alt="otp" class="StepOtp__image" />
+  <button class="button button__primary StepOtp__button" (click)="onContinue()">
+    Siguiente<img src="images/next.svg" alt="arrow right" class="button__icon" />
+  </button>
+</div>
