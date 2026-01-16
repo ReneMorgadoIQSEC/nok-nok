@@ -10,4 +10,5 @@
   <button class="button button__primary StepOtp__button" (click)="onContinue()">
     Siguiente<img src="images/next.svg" alt="arrow right" class="button__icon" />
   </button>
+  <app-mail-code [open]="openMailCode" (emitCloseDialog)="onCloseMailCode()"></app-mail-code>
 </div>

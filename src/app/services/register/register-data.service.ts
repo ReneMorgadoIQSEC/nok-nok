@@ -16,6 +16,8 @@ export class RegisterDataService {
         name: '',
         email: '',
         phone: '',
+        password: '',
+        confirmPassword: '',
         completed: false,
       },
       passkey: {
@@ -55,7 +57,7 @@ export class RegisterDataService {
     return this.state.currentStep;
   }
 
-  getStepData(step: RegisterSteps) {
-    return this.state[step];
+  getStepData<T>(step: RegisterSteps): T {
+    return this.state[step as keyof RegisterData] as T;
   }
 }

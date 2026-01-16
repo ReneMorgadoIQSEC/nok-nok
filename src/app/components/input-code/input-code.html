@@ -1,0 +1,5 @@
+<div class="inputCode"> 
+    @for (index of indexes; track index) {
+        <input type="text" class="inputCode__input" [value]="code[index] || ''" (input)="onInput(index, $event)" />
+    }
+</div>

@@ -20,11 +20,21 @@ export class DataComponent {
       name: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
       phone: ['', [Validators.maxLength(15), Validators.pattern(/^(?!([0-9])\1{9})[1-9]\d{9}$/), Validators.minLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+    }, {
+      validators: [this.passwordMatchValidator]
     });
   }
 
   onSubmit() {
-    this.registerDataService.updateCurrentStep(RegisterSteps.PASSKEY, { data: { ...this.form.value, completed: true } });
-    this.router.navigate(['/register/passkey']);
+    this.registerDataService.updateCurrentStep(RegisterSteps.OTP, { data: { ...this.form.value, completed: true } });
+    this.router.navigate(['/register/otp']);
+  }
+
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 }

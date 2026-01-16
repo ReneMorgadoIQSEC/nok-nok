@@ -19,36 +19,42 @@ export class PasskeyComponent {
     this.registerData = this.registerDataService.state;
   }
 
-  async onContinue() {
-    this.openLoader = true;
-    const options = await this.getOptions();
-    if(options.success) {
-      options.data.challenge = base64urlToBuffer(options.data.challenge);
-      options.data.user.id = base64urlToBuffer(options.data.user.id);
-      if ('credentials' in navigator) {
-        const cred = (await navigator.credentials.create({publicKey: options.data })) as PublicKeyCredential;
-        const response = await this.registerHttpService.registerResponse(this.registerData.data.email, cred);
-        if(response.success) {
-          this.registerDataService.updateCurrentStep(RegisterSteps.OTP, { passkey: { completed: true } });
-          this.router.navigate(['/register/otp']);
-        } else {
-          this.showErrorMessage('Ocurrió un error al registrar el Passkey');
-        }
-      } else {
-        this.showErrorMessage('Tu navegador no soporta Passkeys');
-      }
-    } else {
-      this.showErrorMessage('Ocurrió un error al obtener las opciones de registro');
-    }
+  onSkip() {
+    this.registerDataService.updateCurrentStep(RegisterSteps.ASK_ANTISPOOFING, { passkey: { completed: true } });
+    this.router.navigate(['/register/ask-antispoofing']);
   }
 
-  async getOptions() {
-    const options = await this.registerHttpService.registerRequest(this.registerData.data.email, this.registerData.data.name, this.registerData.data.phone || '');
-    if (options.success) {
-      return options.data;
-    } else {
-      return null;
-    }
+  onContinue() {
+    this.registerDataService.updateCurrentStep(RegisterSteps.ASK_ANTISPOOFING, { passkey: { completed: true } });
+    this.router.navigate(['/register/ask-antispoofing']);
+    /*
+    No irá en V1
+    this.openLoader = true;
+    this.registerHttpService.registerRequest$(this.registerData.data.email, this.registerData.data.name, this.registerData.data.phone || '').subscribe((response) => {
+      if(response.success) {
+        response.data.challenge = base64urlToBuffer(response.data.challenge);
+        response.data.user.id = base64urlToBuffer(response.data.user.id);
+        if ('credentials' in navigator) {
+          navigator.credentials.create({publicKey: response.data }).then((cred) => {
+            if(cred) {
+              this.registerHttpService.registerResponse$(this.registerData.data.email, cred).subscribe((response) => {
+                if(response.success) {
+                  this.registerDataService.updateCurrentStep(RegisterSteps.OTP, { passkey: { completed: true } });
+                  this.router.navigate(['/register/ask-antispoofing']);
+                } else {
+                  this.showErrorMessage('Ocurrió un error al registrar el Passkey');
+                }
+              });
+            }
+          });
+        } else {
+          this.showErrorMessage('Tu navegador no soporta Passkeys');
+        }
+      } else {
+        this.showErrorMessage('Ocurrió un error al obtener las opciones de registro');
+      }
+    });
+    */
   }
 
   showErrorMessage(message: string) {

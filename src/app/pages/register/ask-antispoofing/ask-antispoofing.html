@@ -1,1 +1,17 @@
-<p>ask-antispoofing works!</p>
+<div class="AskAntispoofing">
+  <p class="AskAntispoofing__title">Crear cuenta</p>
+  <p class="AskAntispoofing__subtitle">
+    <strong>¿Quieres realizar la prueba de vida?<br/></strong>
+    Este paso nos ayuda a confirmar tu identidad y mantener tu cuenta segura. Puedes hacerlo <strong>ahora</strong> o <strong>continuar</strong> el proceso sin la prueba de vida.
+  </p>
+  <div class="AskAntispoofing__options">
+    <button class="AskAntispoofing__option" (click)="selectOption(true)" [class.selected]="selectedAntispoofing === true">Hacer prueba de vida<img src="images/face_scan.svg" alt="face scanner" class="AskAntispoofing__option__icon" /></button>
+    <button class="AskAntispoofing__option" (click)="selectOption(false)" [class.selected]="selectedAntispoofing === false">Continuar el proceso<img src="images/continue.svg" alt="continue" class="AskAntispoofing__option__icon" /></button>
+  </div>
+  <button class="button button__primary AskAntispoofing__button" (click)="onContinue()">
+    Siguiente<img src="images/next.svg" alt="arrow right" class="button__icon" />
+  </button>
+  <button class="button button__link AskAntispoofing__button" (click)="onSkip()">
+    Omitir este paso
+  </button>
+</div>

@@ -1,12 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
 import { RegisterDataService } from '../services/register/register-data.service';
-import { RegisterSteps } from '../models/register/steps';
+import { AskAntispoofingStep, AntispoofingStep, RegisterSteps } from '../models/register/steps';
+import { PasskeyStep } from '../models/register/steps';
+import { DataStep } from '../models/register/steps';
+import { OtpStep } from '../models/register/steps';
 
 const REGISTER_STEPS: RegisterSteps[] = [
   RegisterSteps.DATA,
-  RegisterSteps.PASSKEY,
   RegisterSteps.OTP,
+  RegisterSteps.PASSKEY,
   RegisterSteps.ASK_ANTISPOOFING,
   RegisterSteps.ANTISPOOFING,
 ];
@@ -26,7 +29,7 @@ export class RegisterStepGuard implements CanActivate {
     if (!current) return true;
 
     const firstIncomplete = this.getFirstIncompleteStep();
-    console.log('firstIncomplete', this.registerDataService.getStepData(RegisterSteps.PASSKEY).completed);
+    console.log('firstIncomplete', this.registerDataService.getStepData<PasskeyStep>(RegisterSteps.PASSKEY).completed);
     const currentIndex = REGISTER_STEPS.indexOf(current);
     const allowedIndex = REGISTER_STEPS.indexOf(firstIncomplete);
 
@@ -36,11 +39,11 @@ export class RegisterStepGuard implements CanActivate {
   }
 
   private getFirstIncompleteStep(): RegisterSteps {
-    if (!this.registerDataService.getStepData(RegisterSteps.DATA).completed) return RegisterSteps.DATA;
-    if (!this.registerDataService.getStepData(RegisterSteps.PASSKEY).completed) return RegisterSteps.PASSKEY;
-    if (!this.registerDataService.getStepData(RegisterSteps.OTP).completed) return RegisterSteps.OTP;
-    if (!this.registerDataService.getStepData(RegisterSteps.ASK_ANTISPOOFING).completed) return RegisterSteps.ASK_ANTISPOOFING;
-    if (!this.registerDataService.getStepData(RegisterSteps.ANTISPOOFING).completed) return RegisterSteps.ANTISPOOFING;
+    if (!this.registerDataService.getStepData<DataStep>(RegisterSteps.DATA).completed) return RegisterSteps.DATA;
+    if (!this.registerDataService.getStepData<OtpStep>(RegisterSteps.OTP).completed) return RegisterSteps.OTP;
+    if (!this.registerDataService.getStepData<PasskeyStep>(RegisterSteps.PASSKEY).completed) return RegisterSteps.PASSKEY;
+    if (!this.registerDataService.getStepData<AskAntispoofingStep> (RegisterSteps.ASK_ANTISPOOFING).completed) return RegisterSteps.ASK_ANTISPOOFING;
+    if (!this.registerDataService.getStepData<AntispoofingStep> (RegisterSteps.ANTISPOOFING).completed) return RegisterSteps.ANTISPOOFING;
     return RegisterSteps.ANTISPOOFING;
   }
 }

@@ -1,0 +1,31 @@
+@use '../../variables/variables.scss' as variables;
+@use '../../mixins/mixins.scss' as mixins;
+
+.AskAntispoofing {
+  @include mixins.basic-register-step;
+  &__options {
+    display: flex;
+    gap: variables.$spacing_lg;
+    justify-content: center;
+    align-items: center;
+  }
+  &__option {
+    @include mixins.typography(semibold_b2);
+    padding: variables.$spacing_2xl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: variables.$spacing_md;
+    background-color: variables.$white-100;
+    border-radius: variables.$spacing_2xs;
+    border: 2px solid variables.$black-10;
+    cursor: pointer;
+    width: 100%;
+    max-width: 396px;
+    margin: variables.$spacing_sm auto;
+    &.selected {
+      border: 2px solid variables.$blue-40;
+    }
+  }
+}

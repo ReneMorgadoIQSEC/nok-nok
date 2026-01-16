@@ -10,7 +10,7 @@ import { Stepper } from "../../components/stepper/stepper";
 })
 export class RegisterLayout {
   currentStep = 0;
-  steps = ['Información personal', 'Passkey', 'Código de verificación', 'Prueba de vida'];
+  steps = ['Información personal', 'Código de verificación', 'Passkey', 'Prueba de vida'];
   constructor(private registerDataService: RegisterDataService) {
     this.registerDataService.onStepChange.subscribe((step) => {
       this.currentStep++;

@@ -1,1 +1,38 @@
-<p>antispoofing works!</p>
+<div class="Antispoofing">
+  <p class="Antispoofing__title">Crear cuenta</p>
+  <p class="Antispoofing__subtitle" #indicator>
+    La <strong>captura</strong> se hará <strong>automáticamente</strong>, coloca tu rostro dentro
+    del <strong>círculo</strong>.
+  </p>
+  <div class="Antispoofing__container" [class.error]="hasError" [class.success]="!hasError">
+    <video class="Antispoofing__video" #video autoplay muted playsinline></video>
+  </div>
+  <div class="dialog" [class.open]="openLoader">
+    <div class="dialog_backdrop"></div>
+    <div class="dialog__content">
+      <div class="Antispoofing__modal">
+        <img src="images/loader.gif" alt="passkey" class="Antispoofing__modal__image" />
+        <p class="Antispoofing__modal__title">Validando información</p>
+        <p class="Antispoofing__modal__subtitle">Espera un momento, por favor...</p>
+      </div>
+    </div>
+  </div>
+  <app-error
+    [showError]="showErrorAccessCamera"
+    title="Sin acceso a la cámara"
+    message="Para continuar con el proceso de registro, debes permitir el acceso a la cámara. Reinicia la página y vuelve a intentarlo."
+    [image]="'images/unplug.svg'"
+    [buttonText]="'Cerrar'"
+    [attempts]="0"
+    (closeDialog)="onCloseErrorAccessCamera()"
+  ></app-error>
+  <app-error
+    [showError]="showErrorSpoof"
+    title="Error"
+    message="No pudimos verificar tu rostro. Intenta nuevamente."
+    [image]="'images/unplug.svg'"
+    [buttonText]="'Cerrar'"
+    [attempts]="3"
+    (closeDialog)="onCloseErrorSpoof()"
+  ></app-error>
+</div>

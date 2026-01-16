@@ -1,0 +1,16 @@
+<div class="dialog" [class.open]="showError">
+  <div class="dialog_backdrop"></div>
+  <div class="dialog__content">
+    <div class="Error__modal">
+      <button class="Error__modal__close" (click)="emitCloseDialog()">
+        <img src="images/close.svg" alt="close" class="Error__modal__close__image" />
+      </button>
+      <img [src]="image" alt="error" class="Error__modal__image" />
+      <p class="Error__modal__title">{{ title }}</p>
+      <p class="Error__modal__subtitle">{{ message }}</p>
+      <button class="button button__primary" (click)="onContinue()">
+        {{ attempts > attemptsMade ? 'Reintentar' : buttonText }}
+      </button>
+    </div>
+  </div>
+</div>

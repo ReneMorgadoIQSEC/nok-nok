@@ -31,5 +31,8 @@
         background-color: variables.$white-100;
         border-radius: variables.$spacing_2xs;
         padding: variables.$spacing_lg;
+        &.large {
+            max-width: 672px;
+        }
     }
 }

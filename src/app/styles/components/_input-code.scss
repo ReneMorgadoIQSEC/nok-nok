@@ -1,0 +1,18 @@
+@use "../variables/variables.scss" as variables;
+@use "../mixins/mixins.scss" as mixins;
+
+.inputCode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: variables.$spacing_2xs;
+    margin: variables.$spacing_lg auto;
+    &__input {
+        width: 56px;
+        height: 56px;
+        border-radius: 100%;
+        border: 2px solid variables.$blue-40;
+        text-align: center;
+        @include mixins.typography(semibold_b2);
+    }
+}

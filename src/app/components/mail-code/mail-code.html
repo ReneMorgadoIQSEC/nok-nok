@@ -1,0 +1,37 @@
+<div class="dialog" [class.open]="open">
+    <div class="dialog_backdrop"></div>
+    <div class="dialog__content large">
+        @if (result$ | async; as result) {
+            @if (result.success) {
+                <div class="MailCode__modal">
+                    <button class="MailCode__modal__close" (click)="closeDialog()">
+                        <img src="images/close.svg" alt="close" class="MailCode__modal__close__image" />
+                    </button>
+                    <p class="MailCode__modal__title">Hemos enviado el código de verificación</p>
+                    <p class="MailCode__modal__subtitle">Ingresa el código de 6 dígitos que enviamos a tus medios de contacto</p>
+                    <app-input-code [length]="6" (codeReady)="onCode($event)" (badCode)="onBadCode()"></app-input-code>
+                    <button class="button button__primary" (click)="onContinue()" [disabled]="!allowContinue || expiredTimer">
+                        Enviar <img src="images/next.svg" alt="arrow right" class="button__icon" />
+                    </button>
+                    <button class="button button__link" (click)="resetTimer()" [disabled]="!expiredTimer">
+                        Reenviar código
+                    </button>
+                    <div class="MailCode__modal__divider"></div>
+                    <p class="MailCode__modal__timer">Este contenido caducará en {{ stringTimer() }}</p>
+                </div>
+            } @else {
+                <div class="MailCode__modal">
+                    <img src="images/unplug.svg" alt="error" class="MailCode__modal__image" />
+                    <p class="MailCode__modal__title">Error</p>
+                    <p class="MailCode__modal__subtitle">{{ result.message }}</p>
+                </div>
+            }
+        } @else {
+            <div class="MailCode__modal">
+                <img src="images/loader_phone.gif" alt="loader" class="MailCode__modal__image" />
+                <p class="MailCode__modal__title">Enviando código de verificación</p>
+                <p class="MailCode__modal__subtitle">Espera un momento, por favor...</p>
+            </div>
+        }
+    </div>
+</div>

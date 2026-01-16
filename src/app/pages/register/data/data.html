@@ -13,9 +13,19 @@
             <span class="input__error" [ngClass]="{'show': (form.get('email')?.errors?.['required'] || form.get('email')?.errors?.['email']) && form.get('email')?.touched}">Ingrese un correo electrónico válido</span>
         </div>
         <div class="input">
-            <input [appRestrictInput]="'^[0-9]*$'" [maxLength]="10" formControlName="phone" type="tel" class="input__field" id="phone" [ngClass]="{'error': form.get('phone')?.errors?.['pattern'] || form.get('phone')?.errors?.['maxlength'] || form.get('phone')?.errors?.['minlength']} " name="input" placeholder="Número telefónico (opcional)">
+            <input [appRestrictInput]="'^[0-9]*$'" [maxLength]="10" formControlName="phone" type="tel" class="input__field" id="phone" [ngClass]="{'error': (form.get('phone')?.errors?.['pattern'] || form.get('phone')?.errors?.['maxlength'] || form.get('phone')?.errors?.['minlength']) && form.get('phone')?.touched  } " name="input" placeholder="Número telefónico (opcional)">
             <label for="phone" class="input__label">Número telefónico (opcional)</label>
-            <span class="input__error" [ngClass]="{'show': form.get('phone')?.errors?.['pattern'] || form.get('phone')?.errors?.['maxlength'] || form.get('phone')?.errors?.['minlength']}">Ingrese un número telefónico válido</span>
+            <span class="input__error" [ngClass]="{'show': (form.get('phone')?.errors?.['pattern'] || form.get('phone')?.errors?.['maxlength'] || form.get('phone')?.errors?.['minlength']) && form.get('phone')?.touched}">Ingrese un número telefónico válido</span>
+        </div>
+        <div class="input">
+            <input formControlName="password" type="password" class="input__field" id="password" [ngClass]="{'error': (form.get('password')?.errors?.['required'] || form.get('password')?.errors?.['minlength']) && form.get('password')?.touched}" name="password" placeholder="Contraseña">
+            <label for="password" class="input__label">Contraseña</label>
+            <span class="input__error" [ngClass]="{'show': (form.get('password')?.errors?.['required'] || form.get('password')?.errors?.['minlength']) && form.get('password')?.touched}">Ingrese una contraseña válida</span>
+        </div>
+        <div class="input">
+            <input formControlName="confirmPassword" type="password" class="input__field" id="confirmPassword" [ngClass]="{'error': (form.get('confirmPassword')?.errors?.['required'] || form.get('confirmPassword')?.errors?.['minlength']) && form.get('confirmPassword')?.touched}" name="confirmPassword" placeholder="Confirmar contraseña">
+            <label for="confirmPassword" class="input__label">Confirmar contraseña</label>
+            <span class="input__error" [ngClass]="{'show': (form.get('confirmPassword')?.errors?.['required'] || form.get('confirmPassword')?.errors?.['minlength']) && form.get('confirmPassword')?.touched}">Las contraseñas no coinciden</span>
         </div>
         <button class="button button__primary" type="submit" [disabled]="form.invalid">Siguiente <img src="images/next.svg" alt="arrow-right"></button>
     </form>

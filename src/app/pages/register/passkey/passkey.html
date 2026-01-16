@@ -9,6 +9,9 @@
   <button class="button button__primary StepPasskey__button" (click)="onContinue()">
     Siguiente<img src="images/next.svg" alt="arrow right" class="button__icon" />
   </button>
+  <button class="button button__link StepPasskey__button" (click)="onSkip()">
+    Omitir este paso
+  </button>
   <div class="dialog" [class.open]="openLoader">
     <div class="dialog_backdrop"></div>
     <div class="dialog__content">

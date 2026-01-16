@@ -2,8 +2,15 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class Auth {
-  // Cámbialo por tu lógica real (token, cookie, session, etc.)
   isAuthenticated(): boolean {
     return !!localStorage.getItem('access_token');
+  }
+
+  login(email?: string, password?: string) {
+    localStorage.setItem('access_token', '1234567890');
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
   }
 }

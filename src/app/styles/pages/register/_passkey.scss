@@ -2,57 +2,5 @@
 @use '../../mixins/mixins.scss' as mixins;
 
 .StepPasskey {
-  display: flex;
-  flex-direction: column;
-  gap: variables.$spacing_lg;
-  margin: variables.$spacing_14xl auto 0;
-  width: 100%;
-  max-width: 604px;
-  &__title {
-    @include mixins.typography(bold_h);
-    color: variables.$black-100;
-    text-align: center;
-  }
-  &__subtitle {
-    @include mixins.typography(regular_b1);
-    color: variables.$black-100;
-    text-align: center;
-    & strong {
-      @include mixins.typography(semibold_b1);
-    }
-  }
-  &__image {
-    width: 100%;
-    height: 100%;
-    max-width: 300px;
-    max-height: 300px;
-    margin: variables.$spacing_sm auto 0;
-    object-fit: contain;
-  }
-  &__button {
-    margin: variables.$spacing_2xs auto 0;
-  }
-  &__modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: variables.$spacing_xl;
-    gap: variables.$spacing_2xs;
-    &__title {
-      @include mixins.typography(semibold_b2);
-      color: variables.$black-100;
-      text-align: center;
-    }
-    &__subtitle {
-      @include mixins.typography(regular_b1);
-      color: variables.$black-100;
-      text-align: center;
-    }
-    &__image {
-      width: 100%;
-      max-width: 100px;
-      margin-bottom: variables.$spacing_sm;
-    }
-  }
+  @include mixins.basic-register-step;
 }

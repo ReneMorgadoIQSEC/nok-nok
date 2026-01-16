@@ -27,10 +27,10 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'data' },
       { path: 'data', component: DataComponent },
-      { path: 'passkey', component: PasskeyComponent, canActivate: [RegisterStepGuard] },
-      { path: 'otp', component: OtpComponent, canActivate: [RegisterStepGuard] },
-      { path: 'ask-antispoofing', component: AskAntispoofingComponent, canActivate: [RegisterStepGuard] },
-      { path: 'antispoofing', component: AntispoofingComponent, canActivate: [RegisterStepGuard] },
+      { path: 'otp', component: OtpComponent, /*canActivate: [RegisterStepGuard] */ },
+      { path: 'passkey', component: PasskeyComponent, /*canActivate: [RegisterStepGuard] */ },
+      { path: 'ask-antispoofing', component: AskAntispoofingComponent, /*canActivate: [RegisterStepGuard] */ },
+      { path: 'antispoofing', component: AntispoofingComponent, /*canActivate: [RegisterStepGuard] */ },
     ],
   },
 

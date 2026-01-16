@@ -19,6 +19,8 @@ export interface DataStep {
     name: string;
     email: string;
     phone?: string;
+    password: string;
+    confirmPassword: string;
     completed: boolean;
 }
 

@@ -1,0 +1,45 @@
+@use '../variables/variables.scss' as variables;
+@use '../mixins/mixins.scss' as mixins;
+
+.Error {
+  &__modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: variables.$spacing_xl;
+    gap: variables.$spacing_2xs;
+    &__close {
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      &__image {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    &__title {
+      @include mixins.typography(semibold_b2);
+      color: variables.$black-100;
+      text-align: center;
+    }
+    &__subtitle {
+      @include mixins.typography(regular_b1);
+      color: variables.$black-100;
+      text-align: center;
+    }
+    &__image {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: variables.$spacing_sm;
+    }
+    & .button {
+      margin-top: variables.$spacing_lg;
+    }
+  }
+}

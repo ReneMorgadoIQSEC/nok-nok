@@ -2,20 +2,7 @@
 @use "../../mixins/mixins.scss" as mixins;
 
 .StepData {
-    display: flex;
-    flex-direction: column;
-    gap: variables.$spacing_lg;
-    margin-top: variables.$spacing_14xl;
-    &__title {
-        @include mixins.typography(bold_h);
-        color: variables.$black-100;
-        text-align: center;
-    }
-    &__subtitle {
-        @include mixins.typography(regular_b1);
-        color: variables.$black-100;
-        text-align: center;
-    }
+    @include mixins.basic-register-step;
     &__form {
         display: flex;
         flex-direction: column;

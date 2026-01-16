@@ -2,34 +2,5 @@
 @use '../../mixins/mixins.scss' as mixins;
 
 .StepOtp {
-  display: flex;
-  flex-direction: column;
-  gap: variables.$spacing_lg;
-  margin: variables.$spacing_14xl auto 0;
-  width: 100%;
-  max-width: 688px;
-  &__title {
-    @include mixins.typography(bold_h);
-    color: variables.$black-100;
-    text-align: center;
-  }
-  &__subtitle {
-    @include mixins.typography(regular_b1);
-    color: variables.$black-100;
-    text-align: center;
-    & strong {
-      @include mixins.typography(semibold_b1);
-    }
-  }
-  &__image {
-    width: 100%;
-    height: 100%;
-    max-width: 300px;
-    max-height: 300px;
-    margin: variables.$spacing_sm auto 0;
-    object-fit: contain;
-  }
-  &__button {
-    margin: variables.$spacing_2xs auto 0;
-  }
+  @include mixins.basic-register-step;
 }
