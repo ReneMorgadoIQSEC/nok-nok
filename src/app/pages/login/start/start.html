@@ -1,1 +1,20 @@
-<p>start works!</p>
+<form class="Start" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+    <img src="images/iqsec.svg" alt="logo" class="Start__logo" />
+    <p class="Start__title">Inicia sesión</p>
+    <div class="input">
+        <input formControlName="email" type="text" class="input__field" id="email" [ngClass]="{'error': (emailForm.get('email')?.errors?.['required'] || emailForm.get('email')?.errors?.['email']) && emailForm.get('email')?.touched}" name="email" placeholder="Correo electrónico">
+        <label for="email" class="input__label">Correo electrónico</label>
+        <span class="input__error" [ngClass]="{'show': (emailForm.get('email')?.errors?.['required'] || emailForm.get('email')?.errors?.['email']) && emailForm.get('email')?.touched}">Ingrese un correo electrónico válido</span>
+    </div>
+    <button type="submit" role="submit" class="button button__primary" [disabled]="emailForm.invalid">
+        Siguiente
+        <img src="images/next.svg" alt="arrow right" class="button__icon" />
+    </button>
+    <button type="button" role="button" class="button button__secondary" [disabled]="emailForm.invalid" (click)="onLoginWithPhone()">
+        <img src="images/phone.svg" alt="phone" class="button__icon" />
+        Inicia sesión a través del celular
+    </button>
+    <a [routerLink]="['/register']" class="button button__link" >
+        Crear cuenta
+    </a>
+</form>

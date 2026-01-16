@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Auth } from '../../../services/auth/auth';
 import { Router } from '@angular/router';
+import { SessionData } from '../../../models/session/session';
+import { Session } from '../../../services/session/session';
 
 @Component({
   selector: 'app-home-component',
@@ -8,12 +10,9 @@ import { Router } from '@angular/router';
   templateUrl: './home.html'
 })
 export class HomeComponent {
-
-  constructor(private auth: Auth, private router: Router) {
-  }
-
-  logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+  sessionData: SessionData | null = null;
+  
+  constructor(private session: Session) {
+    this.sessionData = this.session.recoverSessionData();
   }
 }

@@ -1,0 +1,12 @@
+@use "../../variables/variables.scss" as variables;
+@use "../../mixins/mixins.scss" as mixins;
+
+.ProfilePage {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing_xl;
+    &__title {
+        @include mixins.typography(bold_h);
+        color: variables.$black-100;
+    }
+}

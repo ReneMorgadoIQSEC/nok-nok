@@ -1,0 +1,6 @@
+@use "../../variables/variables.scss" as variables;
+@use "../../mixins/mixins.scss" as mixins;
+
+.Start {
+    @include mixins.basic-login-step;
+}

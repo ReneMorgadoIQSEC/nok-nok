@@ -14,8 +14,11 @@ import { AskAntispoofingComponent } from './pages/register/ask-antispoofing/ask-
 import { AntispoofingComponent } from './pages/register/antispoofing/antispoofing';
 
 import { StartComponent } from './pages/login/start/start';
+import { Password } from './pages/login/password/password';
 
 import { HomeComponent } from './pages/home/home/home';
+import { LoginStepGuard } from './guards/login-step-guard';
+import { Profile } from './pages/home/profile/profile';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -27,10 +30,10 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'data' },
       { path: 'data', component: DataComponent },
-      { path: 'otp', component: OtpComponent, /*canActivate: [RegisterStepGuard] */ },
-      { path: 'passkey', component: PasskeyComponent, /*canActivate: [RegisterStepGuard] */ },
-      { path: 'ask-antispoofing', component: AskAntispoofingComponent, /*canActivate: [RegisterStepGuard] */ },
-      { path: 'antispoofing', component: AntispoofingComponent, /*canActivate: [RegisterStepGuard] */ },
+      { path: 'otp', component: OtpComponent, canActivate: [RegisterStepGuard] },
+      { path: 'passkey', component: PasskeyComponent, canActivate: [RegisterStepGuard] },
+      { path: 'ask-antispoofing', component: AskAntispoofingComponent, canActivate: [RegisterStepGuard] },
+      { path: 'antispoofing', component: AntispoofingComponent, canActivate: [RegisterStepGuard] },
     ],
   },
 
@@ -41,8 +44,7 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'start' },
       { path: 'start', component: StartComponent },
-      // { path: 'otp', component: LoginOtpComponent, canActivate: [LoginStepGuard] },
-      // { path: 'passkey', component: LoginPasskeyComponent, canActivate: [LoginStepGuard] },
+      { path: 'password', component: Password, canActivate: [LoginStepGuard] },
     ],
   },
 
@@ -52,6 +54,7 @@ export const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: 'home', component: HomeComponent },
+      { path: 'profile', component: Profile },
     ],
   },
 

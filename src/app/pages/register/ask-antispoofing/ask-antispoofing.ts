@@ -13,8 +13,7 @@ export class AskAntispoofingComponent {
 
   selectedAntispoofing: boolean = true;
 
-  constructor(private router: Router, private registerDataService: RegisterDataService, private auth: Auth) {
-  }
+  constructor(private router: Router, private registerDataService: RegisterDataService, private auth: Auth) {}
 
   selectOption(option: boolean) {
     this.selectedAntispoofing = option;

@@ -1,0 +1,107 @@
+@use '../variables/variables.scss' as variables;
+@use '../mixins/mixins.scss' as mixins;
+
+.shellLayout {
+  width: 100%;
+  &__header {
+    width: 100%;
+    height: 82px;
+    background-color: variables.$white-100;
+    border: 1px solid variables.$black-10;
+    padding: variables.$spacing_sm variables.$spacing_lg;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: variables.$spacing_sm;
+    }
+    &__menu {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      width: 32px;
+      height: 32px;
+    }
+    &__button {
+      background-color: variables.$orange-100;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      color: variables.$white-100;
+      cursor: pointer;
+      border: none;
+      @include mixins.typography(regular_b2);
+      text-transform: uppercase;
+    }
+  }
+  &__main {
+    display: flex;
+    max-height: calc(100vh - 82px);
+  }
+  &__nav {
+    width: 100%;
+    max-width: 247px;
+    height: calc(100vh - 82px);
+    background-color: variables.$white-100;
+    box-shadow: variables.$shadow-20;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: variables.$spacing_xl variables.$spacing_4xl;
+    &.hidden {
+      width: 0px;
+      overflow: hidden;
+      padding: 0;
+    }
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: variables.$spacing_2xs;
+      padding: variables.$spacing_md 0;
+      cursor: pointer;
+      color: variables.$black-100;
+      text-decoration: none;
+      @include mixins.typography(bold_b1);
+      &.active {
+        color: variables.$blue-40;
+        & img {
+          filter: invert(28%) sepia(98%) saturate(2890%) hue-rotate(189deg) brightness(92%)
+            contrast(97%);
+        }
+      }
+    }
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: variables.$spacing_2xs;
+        cursor: pointer;
+        color: variables.$red-100;
+        text-decoration: none;
+        border: none;
+        background-color: transparent;
+        @include mixins.typography(bold_b1);
+    }
+  }
+  &__content {
+    width: 100%;
+    height: auto;
+    padding: variables.$spacing_6xl variables.$spacing_10xl;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: variables.$white-100;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: variables.$gray-20;
+    }
+  }
+}

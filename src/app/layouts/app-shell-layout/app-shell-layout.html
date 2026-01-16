@@ -1,1 +1,32 @@
-<router-outlet></router-outlet>
+<header class="shellLayout__header">
+    <div class="shellLayout__header__left">
+        <button class="shellLayout__header__menu" (click)="showNavbar.set(!showNavbar())">
+            <img src="images/menu.svg" alt="menu" class="shellLayout__header__menu__icon">
+        </button>
+        <img src="images/iqsec.svg" alt="logo" class="shellLayout__header__logo">
+    </div>
+    <button class="shellLayout__header__button">
+        {{ sessionData?.email?.slice(0, 1) }}
+    </button>
+</header>
+<main class="shellLayout__main">
+    <nav class="shellLayout__nav" [ngClass]="{'hidden': !showNavbar()}">
+        <div class="shellLayout__nav__items">
+            <a [routerLink]="['/home']" class="shellLayout__nav__item" [ngClass]="{'active': isActive('/home')}">
+                <img src="images/home.svg" alt="home" class="shellLayout__nav__icon">
+                <span class="shellLayout__nav__text">Inicio</span>
+            </a>
+            <a [routerLink]="['/profile']" class="shellLayout__nav__item" [ngClass]="{'active': isActive('/profile')}">
+                <img src="images/profile.svg" alt="home" class="shellLayout__nav__icon">
+                <span class="shellLayout__nav__text">Mi Perfil</span>
+            </a>
+        </div>
+        <button class="shellLayout__nav__close" (click)="logout()">
+            Cerrar sesión
+            <img src="images/logout.svg" alt="close" class="shellLayout__nav__close__icon">
+        </button>
+    </nav>
+    <section class="shellLayout__content" (click)="showNavbar.set(false)">
+        <router-outlet></router-outlet>
+    </section>
+</main>
