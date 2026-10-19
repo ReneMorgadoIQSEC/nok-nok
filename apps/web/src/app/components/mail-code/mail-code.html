@@ -10,10 +10,20 @@
                     <p class="MailCode__modal__title">Hemos enviado el código de verificación</p>
                     <p class="MailCode__modal__subtitle">Ingresa el código de 6 dígitos que enviamos a tus medios de contacto</p>
                     <app-input-code [length]="6" (codeReady)="onCode($event)" (badCode)="onBadCode()"></app-input-code>
-                    <button class="button button__primary" (click)="onContinue()" [disabled]="!allowContinue || expiredTimer">
-                        Enviar <img src="images/next.svg" alt="arrow right" class="button__icon" />
+                    @if (verifyError()) {
+                        <p class="MailCode__modal__subtitle">{{ verifyError() }}</p>
+                    }
+                    <button
+                        class="button button__primary"
+                        (click)="onContinue()"
+                        [disabled]="!allowContinue || expiredTimer || verifying()"
+                    >
+                        {{ verifying() ? 'Verificando...' : 'Enviar' }}
+                        @if (!verifying()) {
+                            <img src="images/next.svg" alt="arrow right" class="button__icon" />
+                        }
                     </button>
-                    <button class="button button__link" (click)="resetTimer()" [disabled]="!expiredTimer">
+                    <button class="button button__link" (click)="resetTimer()" [disabled]="!expiredTimer || verifying()">
                         Reenviar código
                     </button>
                     <div class="MailCode__modal__divider"></div>
