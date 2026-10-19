@@ -1,0 +1,38 @@
+.register-layout {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing_sm $spacing_lg;
+    border-bottom: 1px solid $color_black_10;
+
+    &-logo {
+      width: 160px;
+    }
+
+    &-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+
+    &-button-icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__main {
+    padding: $spacing_8xl $spacing_sm 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: $spacing_xl;
+    & app-step-indicator {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<ul class="step-indicator">
+  @for (step of totalSteps(); track step.value) {
+    <li [class]="getStepClass(step)">
+      @if (completedSteps().some((completedStep) => completedStep.value === step.value)) {
+        <img src="images/check.svg" alt="Check" class="step-indicator__step-icon" />
+      } @else {
+        <span class="step-indicator__step-number">{{ '0' + (totalSteps().indexOf(step) + 1) }}</span>
+      }
+      <span class="step-indicator__step-label">{{ step.label }}</span>
+    </li>
+    @if (step !== totalSteps()[totalSteps().length - 1]) {
+      <div [class]="getLineClass(step)"></div>
+    }
+  }
+</ul>

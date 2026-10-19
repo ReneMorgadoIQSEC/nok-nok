@@ -1,0 +1,12 @@
+<div class="register-layout">
+  <header class="register-layout__header">
+    <img src="images/logo.png" alt="Logo" class="register-layout__header-logo">
+    <button class="register-layout__header-button">
+      <img (click)="onCloseButtonClick()" src="images/close.svg" alt="Icono de cerrar" class="register-layout__header-button-icon">
+    </button>
+  </header>
+  <main class="register-layout__main">
+    <app-step-indicator [step]="step" [totalSteps]="totalSteps" />
+    <router-outlet />
+  </main>
+</div>

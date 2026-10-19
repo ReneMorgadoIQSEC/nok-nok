@@ -1,0 +1,61 @@
+// Colores
+$color_white: var(--white);
+$color_black: var(--black);
+$color_black_10: var(--black-10);
+$color_blue_50: var(--blue-50);
+$color_gray_50: var(--gray-50);
+$color_blue_25: var(--blue-25);
+// Espaciado
+$spacing_3xs: var(--spacing_3xs);
+$spacing_2xs: var(--spacing_2xs);
+$spacing_xs: var(--spacing_xs);
+$spacing_sm: var(--spacing_sm);
+$spacing_md: var(--spacing_md);
+$spacing_lg: var(--spacing_lg);
+$spacing_xl: var(--spacing_xl);
+$spacing_2xl: var(--spacing_2xl);
+$spacing_3xl: var(--spacing_3xl);
+$spacing_4xl: var(--spacing_4xl);
+$spacing_5xl: var(--spacing_5xl);
+$spacing_6xl: var(--spacing_6xl);
+$spacing_7xl: var(--spacing_7xl);
+$spacing_8xl: var(--spacing_8xl);
+
+// Radius
+$radius_none: var(--radius_none);
+$radius_3xs: var(--radius_3xs);
+$radius_2xs: var(--radius_2xs);
+$radius_xs: var(--radius_xs);
+$radius_none: var(--radius_none);
+$radius_s: var(--radius_s);
+$radius_sm: var(--radius_sm);
+$radius_m: var(--radius_m);
+$radius_lg: var(--radius_lg);
+
+$breakpoints: (
+  xs_mobile: 350px,
+  mobile: 414px,
+  tablet: 768px,
+  desktop: 1025px,
+);
+
+$typography: (   
+  example: (
+    size: 16px,
+    weight: 400,
+    line-height: 1.5,
+    font-family: sans-serif,
+  ),
+); 
+
+$buttons: (
+  primary: (
+    background: $color_black,
+    color: $color_white,
+    border: $color_black,
+    background_disabled: $color_black,
+    color_disabled: $color_white,
+    border_disabled: $color_black,
+  ),
+);
+

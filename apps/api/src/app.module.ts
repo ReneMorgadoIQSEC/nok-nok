@@ -1,17 +1,15 @@
-import { join } from 'path';
-import { existsSync } from 'fs';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { ExternalModule } from './external/external.module';
-import { FidoModule } from './fido/fido.module';
-import { HealthModule } from './health/health.module';
-import { SpaModule } from './spa/spa.module';
-import { UtilitiesModule } from './utilities/utilities.module';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
-function resolveWebDistPath(configured?: string): string {
-  if (configured && existsSync(configured)) {
-    return configured;
+const isDev = process.env.NODE_ENV !== 'production';
+
+function resolveAngularDist() {
+  if (process.env.ANGULAR_DIST && existsSync(process.env.ANGULAR_DIST)) {
+    return process.env.ANGULAR_DIST;
   }
 
   const candidates = [
@@ -20,37 +18,27 @@ function resolveWebDistPath(configured?: string): string {
     join(process.cwd(), 'apps', 'web', 'dist', 'web', 'browser'),
   ];
 
-  return candidates.find((path) => existsSync(path)) ?? candidates[0];
+  const found = candidates.find((path) => existsSync(path));
+  if (!found && !isDev) {
+    console.warn(
+      '[static] No se encontró el build de Angular. Define ANGULAR_DIST o ejecuta npm run build.',
+    );
+  }
+  return found ?? candidates[0];
 }
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: ['.env', join(__dirname, '..', '.env')],
-    }),
-    ServeStaticModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        const rootPath = resolveWebDistPath(config.get<string>('WEB_DIST_PATH'));
-        return [
-          {
-            rootPath,
-            exclude: ['/api*', '/fido*', '/health*', '/utilities*'],
-            serveStaticOptions: {
-              fallthrough: true,
-            },
-          },
-        ];
-      },
-    }),
-    ExternalModule,
-    FidoModule,
-    UtilitiesModule,
-    HealthModule,
-    SpaModule,
+    ...(isDev
+      ? []
+      : [
+          ServeStaticModule.forRoot({
+            rootPath: resolveAngularDist(),
+            exclude: ['/api/(.*)'],
+          }),
+        ]),
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
-
-

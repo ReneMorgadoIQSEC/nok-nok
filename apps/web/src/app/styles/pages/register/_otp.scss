@@ -1,6 +1,0 @@
-@use '../../variables/variables.scss' as variables;
-@use '../../mixins/mixins.scss' as mixins;
-
-.StepOtp {
-  @include mixins.basic-register-step;
-}

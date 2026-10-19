@@ -1,1 +1,17 @@
-@forward "./app/app.scss";
+// Base
+@import 'styles/base/root.scss';
+@import 'styles/base/reset.scss';
+@import 'styles/base/fonts.scss';
+
+// Variables
+@import 'styles/base/variables.scss';
+
+// Mixins
+@import 'styles/base/mixins.scss';
+
+// Components
+@import 'styles/components/buttons.scss';
+@import 'styles/components/step-indicator.scss';
+
+// Layouts
+@import 'styles/layouts/register-layout.scss';

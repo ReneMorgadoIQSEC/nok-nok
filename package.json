@@ -1,25 +1,21 @@
 {
   "name": "nok-nok",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "packageManager": "npm@10.9.4",
+  "description": "Monorepo Nok Nok — NestJS API + Angular web",
   "engines": {
     "node": "22.21.1"
   },
   "workspaces": [
     "apps/*"
   ],
-
   "scripts": {
-    "start": "npm run start:dev -w @nok-nok/api",
-    "start:api": "npm run start:dev -w @nok-nok/api",
-    "start:web": "npm run start -w @nok-nok/web",
-    "start:dev": "npm run start:api & npm run start:web",
-    "build": "npm run build:web && npm run build:api",
-    "build:web": "npm run build -w @nok-nok/web",
-    "build:api": "npm run build -w @nok-nok/api",
-    "start:prod": "npm run start:prod -w @nok-nok/api",
-    "test": "npm run test -w @nok-nok/web",
-    "test:web": "npm run test -w @nok-nok/web"
+    "certs": "node scripts/generate-certs.mjs",
+    "predev": "node scripts/generate-certs.mjs",
+    "dev": "node scripts/start-dev.mjs",
+    "build": "npm run build --workspace=@nok-nok/web && npm run build --workspace=@nok-nok/api",
+    "start": "NODE_ENV=production npm run start:prod --workspace=@nok-nok/api",
+    "start:api": "npm run start:dev --workspace=@nok-nok/api",
+    "start:web": "npm run start --workspace=@nok-nok/web"
   }
 }

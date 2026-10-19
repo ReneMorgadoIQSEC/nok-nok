@@ -1,30 +1,22 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { LoginSteps } from '../../../models/login/steps';
-import { LoginDataService } from '../../../services/login/login-data.service';
+import { ELoginStep } from '../../../interfaces/IState';
+import { StateService } from '../../../services/state';
 
 @Component({
-  selector: 'app-start-component',
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
-  templateUrl: './start.html'
+  selector: 'app-login-start',
+  imports: [RouterLink],
+  templateUrl: './start.html',
 })
-export class StartComponent {
-  emailForm: FormGroup;
+export class LoginStart {
+  private readonly router = inject(Router);
+  private readonly stateService = inject(StateService);
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private loginDataService: LoginDataService) {
-    this.emailForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
-    });
-  }
-  onSubmit() { 
-    this.loginDataService.updateCurrentStep(LoginSteps.PASSWORD, { [LoginSteps.START]: { email: this.emailForm.value.email, completed: true } });
-    this.router.navigate(['/login/password']);
-  }
-  onLoginWithPhone(){
-    this.loginDataService.updateCurrentStep(LoginSteps.PASSWORD, { [LoginSteps.START]: { email: this.emailForm.value.email, completed: true } });
-    this.router.navigate(['/login/password']);
-    this.loginDataService.triggerPhoneLogin(this.emailForm.value.email);
+  continue(): void {
+    if (this.stateService.loginStep() === ELoginStep.Start) {
+      this.stateService.setLoginStep(ELoginStep.Password);
+    }
+
+    void this.router.navigate(['/login', ELoginStep.Password]);
   }
 }

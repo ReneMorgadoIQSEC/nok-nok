@@ -1,14 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { CanActivateChild, Router, UrlTree } from '@angular/router';
-import { Auth } from '../services/auth/auth';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { StateService } from '../services/state';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivateChild {
-  private auth = inject(Auth);
-  private router = inject(Router);
+export const authGuard: CanActivateFn = () => {
+  const stateService = inject(StateService);
+  const router = inject(Router);
 
-  canActivateChild(): boolean | UrlTree {
-    if (this.auth.isAuthenticated()) return true;
-    return this.router.createUrlTree(['/login']);
-  }
-}
+  if (stateService.authenticated()) return true;
+
+  return router.createUrlTree(['/login']);
+};

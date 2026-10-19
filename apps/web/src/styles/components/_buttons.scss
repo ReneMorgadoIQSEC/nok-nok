@@ -1,0 +1,44 @@
+@use 'sass:map';
+
+button {
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 342px;
+    height: 44px;
+    gap: $spacing_2xs;
+    padding: $spacing_sm 0;
+    border-radius: $spacing_xl;
+    margin: 0 auto;
+    @each $type, $styles in $buttons {
+      &.button-#{$type} {
+        background: map.get($styles, background);
+        border: 2px solid map.get($styles, border);
+        color: map.get($styles, color);
+        @include typography(example);
+        text-decoration: none;
+        & .button__icon {
+            fill: map.get($styles, color);
+            color: map.get($styles, color);
+            width: 16px;
+            height: 16px;
+        }
+        &:disabled {
+          pointer-events: none;
+          background: map.get($styles, background_disabled);
+          border: 2px solid map.get($styles, border_disabled);
+          color: map.get($styles, color_disabled);
+          &.button__icon {
+            color: map.get($styles, color_disabled);
+            fill: map.get($styles, color_disabled);
+          }
+        }
+      }
+    }
+  }
+  
