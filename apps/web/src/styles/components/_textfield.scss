@@ -1,0 +1,51 @@
+.textfield {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing_3xs;
+  position: relative;
+  &__label {
+    display: none;
+    position: absolute;
+    top: -8px;
+    left: $spacing_xs;
+    background-color: $color_white;
+    @include typography(medium_sd);
+    color: $color_gray_75;
+    padding: 0 $spacing_3xs;
+    transition: display 0.3s ease;
+  }
+  &:has(&__input:not(:placeholder-shown)) &__label {
+    display: block;
+  }
+  &__input {
+    width: 100%;
+    max-width: 392px;
+    height: 56px;
+    padding: $spacing_2xs $spacing_sm;
+    border: 1px solid $color_gray_75;
+    border-radius: $spacing_3xs;
+    @include typography(medium_b1);
+    &:focus {
+      border-color: $color_blue_50;
+    }
+    &:not(:placeholder-shown) {
+      border-color: $color_blue_50;
+    }
+  }
+  &__error {
+    display: none;
+    @include typography(regular_sd);
+    color: $color_red_50;
+  }
+  &.error {
+    & .textfield__error {
+      display: block;
+    }
+    & .textfield__input {
+      border-color: $color_red_50 !important;
+    }
+    & .textfield__label {
+      color: $color_red_50;
+    }
+  }
+}

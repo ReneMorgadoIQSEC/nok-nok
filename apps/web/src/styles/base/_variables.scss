@@ -3,8 +3,11 @@ $color_white: var(--white);
 $color_black: var(--black);
 $color_black_10: var(--black-10);
 $color_blue_50: var(--blue-50);
+$color_gray_75: var(--gray-75);
 $color_gray_50: var(--gray-50);
 $color_blue_25: var(--blue-25);
+$color_gray_25: var(--gray-25);
+$color_red_50: var(--red-50);
 // Espaciado
 $spacing_3xs: var(--spacing_3xs);
 $spacing_2xs: var(--spacing_2xs);
@@ -39,23 +42,61 @@ $breakpoints: (
   desktop: 1025px,
 );
 
-$typography: (   
-  example: (
+$typography: (  
+  regular_sd: (
+    size: 12px,
+    weight: 400,
+  ),
+  regular_b1: (
     size: 16px,
     weight: 400,
-    line-height: 1.5,
-    font-family: sans-serif,
+  ),
+  medium_sd: (
+    size: 12px,
+    weight: 500,
+  ),
+  medium_b0: (
+    size: 14px,
+    weight: 500,
+  ),
+  medium_b1: (
+    size: 16px,
+    weight: 500,
+  ),
+  semibold_sd: (
+    size: 12px,
+    weight: 600,
+  ),
+  semibold_b1: (
+    size: 16px,
+    weight: 600,
+  ),
+  Sh: (
+    size: 20px,
+    weight: 600,
+  ),
+  H: (
+    size: 40px,
+    weight: 600,
   ),
 ); 
 
 $buttons: (
   primary: (
-    background: $color_black,
+    background: $color_blue_50,
     color: $color_white,
-    border: $color_black,
-    background_disabled: $color_black,
-    color_disabled: $color_white,
-    border_disabled: $color_black,
+    border: $color_blue_50,
+    background_disabled: $color_gray_25,
+    color_disabled: $color_gray_50,
+    border_disabled: $color_gray_25,
+  ),
+  secondary: (
+    background: $color_white,
+    color: $color_blue_50,
+    border: $color_white,
+    background_disabled: $color_white,
+    color_disabled: $color_gray_50,
+    border_disabled: $color_white,
   ),
 );
 

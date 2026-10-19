@@ -35,4 +35,30 @@
       width: 100%;
     }
   }
+
+  &__page{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing_lg;
+  }
+  &__title {
+    @include typography(H);
+    text-align: center;
+  }
+  &__instruction {
+    @include typography(regular_b1);
+    text-align: center;
+    & strong {
+      @include typography(semibold_b1);
+    }
+  }
+
+  &__buttons {
+    margin-top: $spacing_2xs;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing_lg;
+  }
 }

@@ -1,4 +1,28 @@
-<section>
-  <p>Inicio</p>
-  <button type="button" (click)="continue()">Continuar</button>
-</section>
+<form class="register-layout__page" (ngSubmit)="onSubmit()" [formGroup]="form">
+  <p class="register-layout__title">Crear cuenta</p>
+  <p class="register-layout__instruction">Ingresa los siguientes datos para continuar</p>
+  <label class="textfield" [ngClass]="{'error': phoneError()}">
+    <span class="textfield__label">Número telefónico (opcional)</span>
+    <input class="textfield__input" placeholder="Número telefónico (opcional)" type="tel" formControlName="phone" />
+    @if (phoneError(); as message) {
+      <span class="textfield__error">{{ message }}</span>
+    }
+  </label>
+  <label class="textfield" [ngClass]="{'error': passwordError()}">
+    <span class="textfield__label">Contraseña</span>
+    <input class="textfield__input" placeholder="Contraseña" type="password" formControlName="password" />
+    @if (passwordError(); as message) {
+      <span class="textfield__error">{{ message }}</span>
+    }
+  </label>
+  <label class="textfield" [ngClass]="{'error': confirmPasswordError()}">
+    <span class="textfield__label">Confirmar contraseña</span>
+    <input class="textfield__input" placeholder="Confirmar contraseña" type="password" formControlName="confirmPassword"/>
+    @if (confirmPasswordError(); as message) {
+      <span class="textfield__error">{{ message }}</span>
+    }
+  </label>
+  <div class="register-layout__buttons">
+    <button type="submit" class="button button-primary">Continuar</button>
+  </div>
+</form>

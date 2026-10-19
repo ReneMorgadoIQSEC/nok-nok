@@ -30,6 +30,7 @@
       color: $color_gray_50;
       text-align: center;
       width: 200%;
+      @include typography(semibold_sd);
     }
     &-number, &-icon {
       width: 40px;
@@ -42,6 +43,7 @@
       color: $color_gray_50;
       border: 2px solid $color_gray_50;
       transition: background-color 0.3s ease, border 0.3s ease, color 0.3s ease;
+      @include typography(medium_b0);
     }
     &-icon {
       padding: $spacing_3xs;

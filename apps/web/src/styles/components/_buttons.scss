@@ -9,18 +9,18 @@ button {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 342px;
-    height: 44px;
+    max-width: 392px;
+    height: 56px;
     gap: $spacing_2xs;
     padding: $spacing_sm 0;
-    border-radius: $spacing_xl;
+    border-radius: $spacing_sm;
     margin: 0 auto;
     @each $type, $styles in $buttons {
       &.button-#{$type} {
         background: map.get($styles, background);
         border: 2px solid map.get($styles, border);
         color: map.get($styles, color);
-        @include typography(example);
+        @include typography(semibold_b1);
         text-decoration: none;
         & .button__icon {
             fill: map.get($styles, color);
