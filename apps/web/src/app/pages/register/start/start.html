@@ -1,28 +1,44 @@
 <form class="register-layout__page" (ngSubmit)="onSubmit()" [formGroup]="form">
   <p class="register-layout__title">Crear cuenta</p>
-  <p class="register-layout__instruction">Ingresa los siguientes datos para continuar</p>
-  <label class="textfield" [ngClass]="{'error': phoneError()}">
-    <span class="textfield__label">Número telefónico (opcional)</span>
-    <input class="textfield__input" placeholder="Número telefónico (opcional)" type="tel" formControlName="phone" />
-    @if (phoneError(); as message) {
-      <span class="textfield__error">{{ message }}</span>
-    }
-  </label>
-  <label class="textfield" [ngClass]="{'error': passwordError()}">
-    <span class="textfield__label">Contraseña</span>
-    <input class="textfield__input" placeholder="Contraseña" type="password" formControlName="password" />
-    @if (passwordError(); as message) {
-      <span class="textfield__error">{{ message }}</span>
-    }
-  </label>
-  <label class="textfield" [ngClass]="{'error': confirmPasswordError()}">
-    <span class="textfield__label">Confirmar contraseña</span>
-    <input class="textfield__input" placeholder="Confirmar contraseña" type="password" formControlName="confirmPassword"/>
-    @if (confirmPasswordError(); as message) {
-      <span class="textfield__error">{{ message }}</span>
-    }
-  </label>
+  <p class="register-layout__instruction">Ingresa los siguientes datos</p>
+  <fieldset class="register-layout__form">
+    <label class="textfield" [ngClass]="{'error': nameError()}">
+      <span class="textfield__label">Nombre</span>
+      <input class="textfield__input" placeholder="Nombre" type="text" formControlName="name" />
+      @if (nameError(); as message) {
+        <span class="textfield__error">{{ message }}</span>
+      }
+    </label>
+    <label class="textfield" [ngClass]="{'error': emailError()}">
+      <span class="textfield__label">Correo electrónico</span>
+      <input class="textfield__input" placeholder="Correo electrónico" type="email" formControlName="email" />
+      @if (emailError(); as message) {
+        <span class="textfield__error">{{ message }}</span>
+      }
+    </label>
+    <label class="textfield" [ngClass]="{'error': phoneError()}">
+      <span class="textfield__label">Número telefónico (opcional)</span>
+      <input class="textfield__input" placeholder="Número telefónico (opcional)" type="tel" formControlName="phone" />
+      @if (phoneError(); as message) {
+        <span class="textfield__error">{{ message }}</span>
+      }
+    </label>
+    <label class="textfield" [ngClass]="{'error': passwordError()}">
+      <span class="textfield__label">Contraseña</span>
+      <input class="textfield__input" placeholder="Contraseña" type="password" formControlName="password" />
+      @if (passwordError(); as message) {
+        <span class="textfield__error">{{ message }}</span>
+      }
+    </label>
+    <label class="textfield" [ngClass]="{'error': confirmPasswordError()}">
+      <span class="textfield__label">Confirmar contraseña</span>
+      <input class="textfield__input" placeholder="Confirmar contraseña" type="password" formControlName="confirmPassword"/>
+      @if (confirmPasswordError(); as message) {
+        <span class="textfield__error">{{ message }}</span>
+      }
+    </label>
+  </fieldset>
   <div class="register-layout__buttons">
-    <button type="submit" class="button button-primary">Continuar</button>
+    <button [disabled]="form.invalid" type="submit" class="button button-primary">Continuar</button>
   </div>
 </form>

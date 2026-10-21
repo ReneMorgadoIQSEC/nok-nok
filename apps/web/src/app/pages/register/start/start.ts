@@ -55,6 +55,32 @@ export class RegisterStart {
   }
 
   // Field Errors
+  nameError(): string | null {
+    const name = this.form.controls.name;
+    if (!name.touched) {
+      return null;
+    }
+    if (name.hasError('required')) {
+      return 'Ingresa un nombre';
+    }
+    if (name.hasError('minlength')) {
+      return 'El nombre debe tener al menos 3 caracteres';
+    }
+    return null;
+  }
+  emailError(): string | null {
+    const email = this.form.controls.email;
+    if (!email.touched) {
+      return null;
+    }
+    if (email.hasError('required')) {
+      return 'Ingresa un correo electrónico';
+    }
+    if (email.hasError('email')) {
+      return 'Ingresa un correo electrónico válido';
+    }
+    return null;
+  }
   phoneError(): string | null {
     const phone = this.form.controls.phone;
     if (!phone.touched) {

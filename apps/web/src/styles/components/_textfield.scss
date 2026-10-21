@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: $spacing_3xs;
   position: relative;
+  width: 100%;
+  max-width: 392px;
   &__label {
     display: none;
     position: absolute;
