@@ -13,6 +13,8 @@ const node_fs_1 = require("node:fs");
 const node_path_1 = require("node:path");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const utilities_controller_1 = require("./utilities/utilities.controller");
+const utilities_service_1 = require("./utilities/utilities.service");
 const isDev = process.env.NODE_ENV !== 'production';
 function resolveAngularDist() {
     if (process.env.ANGULAR_DIST && (0, node_fs_1.existsSync)(process.env.ANGULAR_DIST)) {
@@ -44,8 +46,8 @@ exports.AppModule = AppModule = __decorate([
                     }),
                 ]),
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [app_controller_1.AppController, utilities_controller_1.UtilitiesController],
+        providers: [app_service_1.AppService, utilities_service_1.UtilitiesService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

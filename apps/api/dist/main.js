@@ -5,6 +5,8 @@ const node_path_1 = require("node:path");
 const core_1 = require("@nestjs/core");
 const http_proxy_1 = require("http-proxy");
 const app_module_1 = require("./app.module");
+const load_env_1 = require("./load-env");
+(0, load_env_1.loadEnv)();
 const isDev = process.env.NODE_ENV !== 'production';
 const port = Number(process.env.PORT ?? (isDev ? 3443 : 3000));
 const webOrigin = process.env.WEB_ORIGIN ?? 'http://127.0.0.1:4200';

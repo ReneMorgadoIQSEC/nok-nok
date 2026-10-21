@@ -4,6 +4,9 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { createProxyServer } from 'http-proxy';
 import { AppModule } from './app.module';
+import { loadEnv } from './load-env';
+
+loadEnv();
 
 const isDev = process.env.NODE_ENV !== 'production';
 const port = Number(process.env.PORT ?? (isDev ? 3443 : 3000));

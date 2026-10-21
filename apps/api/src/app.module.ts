@@ -4,6 +4,8 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UtilitiesController } from './utilities/utilities.controller';
+import { UtilitiesService } from './utilities/utilities.service';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -38,7 +40,7 @@ function resolveAngularDist() {
           }),
         ]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UtilitiesController],
+  providers: [AppService, UtilitiesService],
 })
 export class AppModule {}

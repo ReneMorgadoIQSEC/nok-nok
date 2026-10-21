@@ -24,6 +24,7 @@ export interface State {
   loginStep: ELoginStep;
   authenticated: boolean;
   modalData: ModalData | null;
+  email: string;
 }
 
 export interface ModalData {

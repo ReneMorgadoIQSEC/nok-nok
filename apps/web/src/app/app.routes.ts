@@ -10,6 +10,7 @@ import { LoginStart } from './pages/login/start/start';
 import { RegisterLayout } from './pages/register/register-layout/register-layout';
 import { RegisterStart } from './pages/register/start/start';
 import { RegisterVerificationCode } from './pages/register/verification-code/verification-code';
+import { Passkey } from './pages/register/passkey/passkey';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -41,6 +42,11 @@ export const routes: Routes = [
         path: ERegisterStep.VerificationCode,
         component: RegisterVerificationCode,
         data: { step: ERegisterStep.VerificationCode },
+      },
+      {
+        path: ERegisterStep.Passkey,
+        component: Passkey,
+        data: { step: ERegisterStep.Passkey },
       },
     ],
   },

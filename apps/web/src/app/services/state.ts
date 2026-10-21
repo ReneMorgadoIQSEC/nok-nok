@@ -17,6 +17,7 @@ export class StateService {
       loginStep: ELoginStep.Start,
       authenticated: false,
       modalData: null,
+      email: '',
     };
   }
 
@@ -30,6 +31,10 @@ export class StateService {
 
   setAuthenticated(authenticated: boolean) {
     this.state.update((state) => ({ ...state, authenticated }));
+  }
+
+  setEmail(email: string) {
+    this.state.update((state) => ({ ...state, email }));
   }
 
   setModalData(modalData: ModalData | null) {

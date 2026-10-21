@@ -50,6 +50,7 @@ export class RegisterStart {
       return;
     }
 
+    this.stateService.setEmail(this.form.controls.email.value?.trim() ?? '');
     this.stateService.setRegisterStep(ERegisterStep.VerificationCode);
     void this.router.navigate(['/register', ERegisterStep.VerificationCode]);
   }
