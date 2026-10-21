@@ -18,6 +18,12 @@ export class StateService {
       authenticated: false,
       modalData: null,
       email: '',
+      fullName: '',
+      phoneNumber: '',
+      password: '',
+      identityId: '',
+      deviceId: '',
+      userId: '',
     };
   }
 
@@ -35,6 +41,22 @@ export class StateService {
 
   setEmail(email: string) {
     this.state.update((state) => ({ ...state, email }));
+  }
+
+  setAccount(account: { fullName: string; email: string; phoneNumber: string; password: string }) {
+    this.state.update((state) => ({ ...state, ...account }));
+  }
+
+  setIdentity(identityId: string, deviceId: string) {
+    this.state.update((state) => ({ ...state, identityId, deviceId }));
+  }
+
+  setUserId(userId: string) {
+    this.state.update((state) => ({ ...state, userId }));
+  }
+
+  clearPassword() {
+    this.state.update((state) => ({ ...state, password: '' }));
   }
 
   setModalData(modalData: ModalData | null) {

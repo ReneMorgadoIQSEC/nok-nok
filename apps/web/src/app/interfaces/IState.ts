@@ -25,6 +25,12 @@ export interface State {
   authenticated: boolean;
   modalData: ModalData | null;
   email: string;
+  fullName: string;
+  phoneNumber: string;
+  password: string;
+  identityId: string;
+  deviceId: string;
+  userId: string;
 }
 
 export interface ModalData {

@@ -8,10 +8,17 @@ import { StateService } from '../../../services/state';
 import { VerificationService } from '../../../services/verification';
 import { Code } from '../../../components/code/code';
 import { ERegisterStep } from '../../../interfaces/IState';
+import {
+  registrationErrorMessage,
+  userIdFromResult,
+} from '../../../interfaces/registration';
+import { RegistrationService } from '../../../services/registration';
 import { Router } from '@angular/router';
 
 const SEND_ERROR = 'No logramos enviar el código. Por favor, vuelve a intentarlo.';
 const VERIFY_ERROR = 'No logramos verificar el código. Por favor, vuelve a intentarlo.';
+const REGISTER_ERROR = 'No logramos crear tu cuenta. Por favor, vuelve a intentarlo.';
+const ACCOUNT_ERROR = 'No encontramos los datos de tu registro. Vuelve al inicio e inténtalo de nuevo.';
 
 @Component({
   selector: 'app-verification-code',
@@ -21,6 +28,7 @@ const VERIFY_ERROR = 'No logramos verificar el código. Por favor, vuelve a inte
 export class RegisterVerificationCode {
   private readonly stateService = inject(StateService);
   private readonly verificationService = inject(VerificationService);
+  private readonly registrationService = inject(RegistrationService);
   private readonly router = inject(Router);
   private pendingCode = '';
   showCode = signal(false);
@@ -80,11 +88,7 @@ export class RegisterVerificationCode {
   private handleVerifyResult(payload: unknown) {
     const message = verificationErrorMessage(payload, VERIFY_ERROR);
     if (!message) {
-      this.hideLoaderModal();
-      // Retomar aquí el flujo posterior a la verificación exitosa.
-      console.log('Verificación exitosa', payload);
-      this.stateService.setRegisterStep(ERegisterStep.Passkey);
-      void this.router.navigate(['/register', ERegisterStep.Passkey]);
+      this.registerAccount();
       return;
     }
 
@@ -95,6 +99,44 @@ export class RegisterVerificationCode {
     }
 
     this.showErrorModal(message, 'Aceptar', () => this.hideLoaderModal());
+  }
+
+  private registerAccount() {
+    const state = this.stateService.state();
+    if (!state.identityId || !state.deviceId || !state.fullName || !state.email || !state.password) {
+      this.showErrorModal(ACCOUNT_ERROR, 'Aceptar', () => this.hideLoaderModal());
+      return;
+    }
+
+    this.showLoaderModal('Creando tu cuenta');
+    this.registrationService
+      .registerUser({
+        identityId: state.identityId,
+        fullName: state.fullName,
+        email: state.email,
+        phoneNumber: state.phoneNumber,
+        password: state.password,
+        deviceId: state.deviceId,
+      })
+      .subscribe({
+        next: (result) => this.handleRegisterResult(result),
+        error: (error: unknown) => this.handleRegisterResult(this.errorPayload(error)),
+      });
+  }
+
+  private handleRegisterResult(payload: unknown) {
+    const message = registrationErrorMessage(payload, REGISTER_ERROR);
+    const userId = userIdFromResult(payload);
+    if (message || !userId) {
+      this.showErrorModal(message ?? REGISTER_ERROR, 'Reintentar', () => this.registerAccount());
+      return;
+    }
+
+    this.stateService.setUserId(userId);
+    this.stateService.clearPassword();
+    this.stateService.setRegisterStep(ERegisterStep.Passkey);
+    this.hideLoaderModal();
+    void this.router.navigate(['/register', ERegisterStep.Passkey]);
   }
 
   private errorPayload(error: unknown) {

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -7,9 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ERegisterStep } from '../../../interfaces/IState';
-import { StateService } from '../../../services/state';
 import { CommonModule } from '@angular/common';
+import { ERegisterStep } from '../../../interfaces/IState';
+import { identityFromResult, registrationErrorMessage } from '../../../interfaces/registration';
+import { readClientEnvironment } from '../../../services/client-environment';
+import { RegistrationService } from '../../../services/registration';
+import { StateService } from '../../../services/state';
+
+const IDENTITY_ERROR = 'No logramos crear tu identidad. Por favor, vuelve a intentarlo.';
 
 function passwordsMatch(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;
@@ -30,7 +36,9 @@ function passwordsMatch(control: AbstractControl): ValidationErrors | null {
 export class RegisterStart {
   private readonly router = inject(Router);
   private readonly stateService = inject(StateService);
+  private readonly registrationService = inject(RegistrationService);
   private readonly formBuilder = inject(FormBuilder);
+  private submitting = false;
 
   readonly form = this.formBuilder.group(
     {
@@ -46,13 +54,76 @@ export class RegisterStart {
 
 
   onSubmit(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || this.submitting) {
       return;
     }
 
-    this.stateService.setEmail(this.form.controls.email.value?.trim() ?? '');
+    const account = {
+      fullName: this.form.controls.name.value?.trim() ?? '',
+      email: this.form.controls.email.value?.trim() ?? '',
+      phoneNumber: this.form.controls.phone.value?.trim() ?? '',
+      password: this.form.controls.password.value ?? '',
+    };
+
+    this.submitting = true;
+    this.showLoaderModal('Creando tu identidad');
+    this.registrationService.createIdentity(readClientEnvironment()).subscribe({
+      next: (result) => this.handleIdentityResult(result, account),
+      error: (error: unknown) => this.handleIdentityResult(this.errorPayload(error), account),
+    });
+  }
+
+  private handleIdentityResult(
+    payload: unknown,
+    account: { fullName: string; email: string; phoneNumber: string; password: string },
+  ) {
+    const message = registrationErrorMessage(payload, IDENTITY_ERROR);
+    const identity = identityFromResult(payload);
+    if (message || !identity) {
+      this.submitting = false;
+      this.showErrorModal(message ?? IDENTITY_ERROR, 'Reintentar', () => this.onSubmit());
+      return;
+    }
+
+    this.stateService.setAccount(account);
+    this.stateService.setIdentity(identity.identityId, identity.deviceId);
     this.stateService.setRegisterStep(ERegisterStep.VerificationCode);
+    this.submitting = false;
+    this.hideLoaderModal();
     void this.router.navigate(['/register', ERegisterStep.VerificationCode]);
+  }
+
+  private errorPayload(error: unknown) {
+    return error instanceof HttpErrorResponse ? error.error : error;
+  }
+
+  private hideLoaderModal() {
+    this.stateService.setModalData({
+      show: false,
+    });
+  }
+
+  private showLoaderModal(title: string) {
+    this.stateService.setModalData({
+      show: true,
+      imageSize: 'small',
+      title,
+      description: 'Espera un momento, por favor...',
+      image: 'images/loader.gif',
+    });
+  }
+
+  private showErrorModal(description: string, buttonText: string, buttonAction: () => void) {
+    this.stateService.setModalData({
+      show: true,
+      imageSize: 'large',
+      title: 'Algo salió mal',
+      description,
+      image: 'images/error.svg',
+      buttonText,
+      closeable: true,
+      buttonAction,
+    });
   }
 
   // Field Errors
