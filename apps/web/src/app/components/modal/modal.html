@@ -1,0 +1,22 @@
+<dialog class="modal" [ngClass]="{'hidden': !modalData()?.show}">
+    <div class="modal__content">
+        @if (modalData()?.closeable) {
+            <div class="modal__close-container">
+                <button class="modal__close" (click)="closeModal()"><img src="images/close.svg" alt="Close" class="modal__close-icon"></button>
+            </div>
+        }
+        @if (modalData()?.image) {
+            <img src="{{ modalData()?.image }}" alt="Modal Image" class="modal__image" [ngClass]="{'modal__image--small': modalData()?.imageSize === 'small', 'modal__image--large': modalData()?.imageSize === 'large'}">
+        }
+        @if (modalData()?.title) {
+            <h2 class="modal__title">{{ modalData()?.title }}</h2>
+        }
+        @if (modalData()?.description) {
+            <p class="modal__description">{{ modalData()?.description }}</p>
+        }
+        @if (modalData()?.buttonText) {
+            <button class="button button-primary" (click)="modalData()?.buttonAction?.()">{{ modalData()?.buttonText }}</button>
+        }
+    </div>
+    <div class="modal__backdrop"></div>
+</dialog>

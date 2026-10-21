@@ -1,1 +1,13 @@
-<p>verification-code works!</p>
+<div class="register-layout__page">
+  <p class="register-layout__title">Crear cuenta</p>
+  <p class="register-layout__instruction">
+    Te enviaremos un <strong>código de verificación</strong> a tus medios de contacto registrados.<br>
+    Ingresa el código en la <strong>siguiente pantalla</strong> para continuar con tu proceso de
+    registro.
+  </p>
+  <img src="images/code.svg" alt="Código de verificación" class="register-layout__image">
+  <div class="register-layout__buttons">
+    <button type="submit" class="button button-primary" (click)="sendVerificationCode()">Continuar</button>
+  </div>
+  <app-code [show]="showCode()" (onClose)="showCode.set(false)" (onVerify)="verifyCode($event)" (onResend)="resendCode()"></app-code>
+</div>

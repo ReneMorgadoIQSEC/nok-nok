@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { ELoginStep, ERegisterStep, State } from '../interfaces/IState';
+import { ELoginStep, ERegisterStep, ModalData, State } from '../interfaces/IState';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,7 @@ export class StateService {
       registerStep: ERegisterStep.Start,
       loginStep: ELoginStep.Start,
       authenticated: false,
+      modalData: null,
     };
   }
 
@@ -29,6 +30,10 @@ export class StateService {
 
   setAuthenticated(authenticated: boolean) {
     this.state.update((state) => ({ ...state, authenticated }));
+  }
+
+  setModalData(modalData: ModalData | null) {
+    this.state.update((state) => ({ ...state, modalData }));
   }
 
   resetState() {

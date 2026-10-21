@@ -73,4 +73,9 @@
     width: 100%;
     align-items: center;
   }
+  &__image {
+    width: 100%;
+    max-width: 300px;
+    margin: $spacing_sm auto 0;
+  }
 }

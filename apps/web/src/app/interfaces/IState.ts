@@ -23,4 +23,16 @@ export interface State {
   registerStep: ERegisterStep;
   loginStep: ELoginStep;
   authenticated: boolean;
+  modalData: ModalData | null;
+}
+
+export interface ModalData {
+  show: boolean;
+  imageSize?: 'small' | 'large';
+  closeable?: boolean;
+  image?: string;
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonAction?: () => void;
 }

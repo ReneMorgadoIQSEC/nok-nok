@@ -1,0 +1,27 @@
+@if (show) {
+  <dialog class="verification-code">
+    <div class="verification-code__content">
+      <h2 class="verification-code__title">Hemos enviado el código de verificación</h2>
+      <p class="verification-code__description">
+        Ingresa el código de 6 dígitos que enviamos a tus medios de contacto
+      </p>
+      <form [formGroup]="codeForm" class="verification-code__input-container" (ngSubmit)="verifyCode()">
+        <fieldset class="verification-code__input-fieldset">
+          <input type="text" class="verification-code__input" formControlName="digit1"/>
+          <input type="text" class="verification-code__input" formControlName="digit2"/>
+          <input type="text" class="verification-code__input" formControlName="digit3"/>
+          <input type="text" class="verification-code__input" formControlName="digit4"/>
+          <input type="text" class="verification-code__input" formControlName="digit5"/>
+          <input type="text" class="verification-code__input" formControlName="digit6"/>
+        </fieldset>
+        <button [disabled]="codeRemainingTime() <= 0" type="submit" class="button button-primary">Enviar</button>
+      </form>
+      <button class="button button-secondary" (click)="resendCode()">Reenviar código</button>
+      <hr class="verification-code__divider" />
+      <p class="verification-code__time">
+        Este contenido caducará en <span class="verification-code__time-value">{{ formattedCodeRemainingTime() }}</span>
+      </p>
+    </div>
+    <div class="verification-code__backdrop"></div>
+  </dialog>
+}

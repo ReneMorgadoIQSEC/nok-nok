@@ -1,0 +1,74 @@
+.modal {
+    &.hidden {
+        display: none;
+    }
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: transparent;
+    &__backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 11;
+    }
+    &__content {
+        width: 100%;
+        max-width: 483px;
+        background-color: $color_white;
+        padding: $spacing_4xl;
+        z-index: 12;
+        border-radius: $spacing_2xs;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing_2xs;
+        & .button {
+            margin-top: $spacing_lg;
+        }
+    }
+    &__image {
+        width: 100%;
+        margin: 0 auto $spacing_sm;
+        &--small {
+            max-width: 100px;
+        }
+        &--large {
+            max-width: 300px;
+        }
+    }
+    &__title {
+        @include typography(Sh);
+        text-align: center;
+    }
+    &__description {
+        @include typography(regular_b1);
+        text-align: center;
+    }
+    &__close-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    &__close {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+    }
+    &__close-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
