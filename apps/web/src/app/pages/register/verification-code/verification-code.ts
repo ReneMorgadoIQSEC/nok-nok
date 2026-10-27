@@ -133,7 +133,6 @@ export class RegisterVerificationCode {
     }
 
     this.stateService.setUserId(userId);
-    this.stateService.clearPassword();
     this.stateService.setRegisterStep(ERegisterStep.Passkey);
     this.hideLoaderModal();
     void this.router.navigate(['/register', ERegisterStep.Passkey]);

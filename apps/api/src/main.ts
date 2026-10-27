@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { json, urlencoded } from 'express';
 import { createProxyServer } from 'http-proxy';
 import { AppModule } from './app.module';
 import { loadEnv } from './load-env';
@@ -65,7 +66,10 @@ async function bootstrap() {
   const httpsOptions = loadHttpsOptions();
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     httpsOptions,
+    bodyParser: false,
   });
+  app.use(json({ limit: '20mb' }));
+  app.use(urlencoded({ extended: true, limit: '20mb' }));
 
   app.setGlobalPrefix('api');
   app.enableCors({ origin: true, credentials: true });

@@ -3,11 +3,13 @@ $color_white: var(--white);
 $color_black: var(--black);
 $color_black_10: var(--black-10);
 $color_blue_50: var(--blue-50);
+$color_blue_100: var(--blue-100);
 $color_gray_75: var(--gray-75);
 $color_gray_50: var(--gray-50);
 $color_blue_25: var(--blue-25);
 $color_gray_25: var(--gray-25);
 $color_red_50: var(--red-50);
+$color_green_50: var(--green-50);
 // Espaciado
 $spacing_3xs: var(--spacing_3xs);
 $spacing_2xs: var(--spacing_2xs);
@@ -91,12 +93,20 @@ $buttons: (
     border_disabled: $color_gray_25,
   ),
   secondary: (
-    background: $color_white,
+    background: transparent,
     color: $color_blue_50,
-    border: $color_white,
-    background_disabled: $color_white,
+    border: transparent,
+    background_disabled: transparent,
     color_disabled: $color_gray_50,
-    border_disabled: $color_white,
+    border_disabled: transparent,
+  ),
+  tertiary: (
+    background: $color_blue_100,
+    color: $color_white,
+    border: $color_blue_100,
+    background_disabled: $color_blue_100,
+    color_disabled: $color_white,
+    border_disabled: $color_blue_100,
   ),
 );
 

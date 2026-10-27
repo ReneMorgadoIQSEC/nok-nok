@@ -11,10 +11,13 @@ import {
   serializeNewCredential,
   toCreationOptions,
 } from '../../../services/webauthn';
+import { ERegisterStep } from '../../../interfaces/IState';
+import { Router } from '@angular/router';
 
 const OPTIONS_ERROR = 'No logramos preparar el passkey. Por favor, vuelve a intentarlo.';
 const REGISTER_ERROR = 'No logramos registrar el passkey. Por favor, vuelve a intentarlo.';
-const ACCOUNT_ERROR = 'No encontramos los datos de tu registro. Vuelve al inicio e inténtalo de nuevo.';
+const ACCOUNT_ERROR =
+  'No encontramos los datos de tu registro. Vuelve al inicio e inténtalo de nuevo.';
 const UNSUPPORTED_ERROR = 'Este navegador no puede crear un passkey.';
 
 @Component({
@@ -27,7 +30,7 @@ export class Passkey {
   private readonly registrationService = inject(RegistrationService);
   private pending = false;
   private created = false;
-
+  private readonly router = inject(Router);
   startPasskeyRegistration() {
     if (this.pending) {
       return;
@@ -107,8 +110,11 @@ export class Passkey {
 
   private fail(payload: unknown, fallback = REGISTER_ERROR) {
     this.pending = false;
-    const description = typeof payload === 'string' ? payload : registrationErrorMessage(payload, fallback);
-    this.showErrorModal(description ?? fallback, 'Reintentar', () => this.startPasskeyRegistration());
+    const description =
+      typeof payload === 'string' ? payload : registrationErrorMessage(payload, fallback);
+    this.showErrorModal(description ?? fallback, 'Reintentar', () =>
+      this.startPasskeyRegistration(),
+    );
   }
 
   private errorPayload(error: unknown) {
@@ -153,7 +159,11 @@ export class Passkey {
       image: 'images/check.svg',
       buttonText: 'Aceptar',
       closeable: true,
-      buttonAction: () => this.hideLoaderModal(),
+      buttonAction: () => {
+        this.hideLoaderModal();
+        this.stateService.setRegisterStep(ERegisterStep.LifeTest);
+        void this.router.navigate(['/register', ERegisterStep.LifeTest]);
+      },
     });
   }
 }

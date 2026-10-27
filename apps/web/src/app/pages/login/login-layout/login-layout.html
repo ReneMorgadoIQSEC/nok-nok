@@ -1,4 +1,13 @@
 <section class="login-layout">
-  <p>Inicio de sesión</p>
-  <router-outlet />
+  <div class="login-layout__container">
+    <img src="images/logo.png" alt="Logo" class="login-layout__logo">
+    <p class="login-layout__title">Inicia sesión</p>
+    <router-outlet />
+    @if (stateService.loginStep() === ELoginStep.Password) {
+      <button class="button button-tertiary">Inicia sesión a través del celular</button>
+      <button class="button button-tertiary" (click)="onPasskeyClick()">Inicia sesión con passkey</button>
+    }
+    <a class="button button-secondary" routerLink="/register">Registro</a>
+  </div>
+  <app-modal />
 </section>

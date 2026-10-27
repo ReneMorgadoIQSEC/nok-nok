@@ -1,0 +1,46 @@
+<div class="register-layout__page">
+  <p class="register-layout__title">Crear cuenta</p>
+  @if (!showLifetest) {
+    <p class="register-layout__instruction">
+      <strong>¿Quieres realizar la prueba de vida?</strong><br />
+      Este paso nos ayuda a confirmar tu identidad y mantener tu cuenta segura. Puedes hacerlo
+      <strong>ahora</strong> o <strong>continuar</strong> el proceso sin la prueba de vida.
+    </p>
+    <div class="register-layout__actions">
+      <button
+        [class.active]="actionSelected === 'lifeTest'"
+        class="register-layout__action"
+        (click)="actionSelected = 'lifeTest'"
+      >
+        <span>Hacer prueba de vida</span>
+        <img src="images/lifetest.svg" alt="Hacer prueba de vida" />
+      </button>
+      <button
+        [class.active]="actionSelected === 'continue'"
+        class="register-layout__action"
+        (click)="actionSelected = 'continue'"
+      >
+        <span>Continuar el proceso</span>
+        <img src="images/next.svg" alt="Continuar el proceso" />
+      </button>
+    </div>
+    <div class="register-layout__buttons">
+      <button
+        [disabled]="!actionSelected"
+        type="button"
+        class="button button-primary"
+        (click)="continueWithSelection()"
+      >
+        Continuar
+      </button>
+    </div>
+  } @else {
+    <p class="register-layout__instruction" [innerHTML]="description"></p>
+    <app-life-test
+      class="test-life__pad"
+      (framesCaptured)="onFramesCaptured($event)"
+      (validationError)="onValidationError($event)"
+      (cameraError)="onCameraError($event)"
+    ></app-life-test>
+  }
+</div>

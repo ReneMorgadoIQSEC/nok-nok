@@ -1,5 +1,12 @@
-<section>
-  <p>Bienvenido</p>
-  <a routerLink="/register">Registro</a>
-  <button type="button" (click)="continue()">Continuar</button>
-</section>
+<form class="login-layout__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset class="login-layout__fieldset">
+    <label class="textfield" [ngClass]="{'error': emailError()}">
+      <span class="textfield__label">Correo electrónico</span>
+      <input class="textfield__input" placeholder="Correo electrónico" type="email" formControlName="email" />
+      @if (emailError(); as message) {
+        <span class="textfield__error">{{ message }}</span>
+      }
+    </label>
+  </fieldset>
+  <button [disabled]="form.invalid" type="submit" class="button button-primary">Siguiente</button>
+</form>

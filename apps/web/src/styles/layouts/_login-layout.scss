@@ -1,0 +1,50 @@
+.login-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    padding: $spacing_sm;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(44deg, #017ce022 , white, #017ce022 );
+        width: 100%;
+        max-width: 640px;
+        border-radius: $spacing_4xl;
+        box-shadow: 0 4px 4px -4px $color_black_10;
+        box-shadow: 0 16px 32px -4px $color_black_10;
+        gap: $spacing_lg;
+        padding: $spacing_6xl $spacing_sm;
+        & app-login-start {
+            width: 100%;
+        }
+        & app-password {
+            width: 100%;
+        }
+    }
+    &__logo {
+        width: 100%;
+        max-width: 180px;
+    }
+    &__title {
+        @include typography(H);
+    }
+    &__form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing_2xl;
+        max-width: 392px;
+        margin: 0 auto $spacing_lg;
+    }
+    &__fieldset {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border: none;
+        padding: 0;
+    }
+}

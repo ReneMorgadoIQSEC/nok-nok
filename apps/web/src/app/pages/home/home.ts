@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { StateService } from '../../services/state';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +8,10 @@ import { StateService } from '../../services/state';
 })
 export class Home {
   private readonly router = inject(Router);
-  private readonly stateService = inject(StateService);
+  private readonly authService = inject(AuthService);
 
   logout(): void {
-    this.stateService.resetState();
+    this.authService.logout();
     void this.router.navigateByUrl('/login');
   }
 }

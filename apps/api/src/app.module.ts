@@ -4,6 +4,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { FacialController } from './facial/facial.controller';
+import { FacialService } from './facial/facial.service';
 import { RegistrationController } from './registration/registration.controller';
 import { RegistrationService } from './registration/registration.service';
 import { UtilitiesController } from './utilities/utilities.controller';
@@ -38,11 +42,11 @@ function resolveAngularDist() {
       : [
           ServeStaticModule.forRoot({
             rootPath: resolveAngularDist(),
-            exclude: ['/api/(.*)'],
+            exclude: ['/api/{*path}'],
           }),
         ]),
   ],
-  controllers: [AppController, UtilitiesController, RegistrationController],
-  providers: [AppService, UtilitiesService, RegistrationService],
+  controllers: [AppController, UtilitiesController, RegistrationController, FacialController, AuthController],
+  providers: [AppService, UtilitiesService, RegistrationService, FacialService, AuthService],
 })
 export class AppModule {}

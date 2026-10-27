@@ -10,6 +10,10 @@ export enum ELoginStep {
   Password = 'password',
 }
 
+export enum EAuthenticatedPages {
+  Home = 'home',
+}
+
 export const REGISTER_STEPS: readonly ERegisterStep[] = [
   ERegisterStep.Start,
   ERegisterStep.VerificationCode,

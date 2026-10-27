@@ -11,6 +11,8 @@ import { RegisterLayout } from './pages/register/register-layout/register-layout
 import { RegisterStart } from './pages/register/start/start';
 import { RegisterVerificationCode } from './pages/register/verification-code/verification-code';
 import { Passkey } from './pages/register/passkey/passkey';
+import { Lifetest } from './pages/register/lifetest/lifetest';
+import { Password } from './pages/login/password/password';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -25,13 +27,18 @@ export const routes: Routes = [
         component: LoginStart,
         data: { step: ELoginStep.Start },
       },
+      {
+        path: ELoginStep.Password,
+        component: Password,
+        data: { step: ELoginStep.Password },
+      },
     ],
   },
   {
     path: 'register',
     component: RegisterLayout,
     canActivate: [guestGuard],
-    canActivateChild: [registerStepGuard],
+    //canActivateChild: [registerStepGuard],
     children: [
       {
         path: '',
@@ -47,6 +54,11 @@ export const routes: Routes = [
         path: ERegisterStep.Passkey,
         component: Passkey,
         data: { step: ERegisterStep.Passkey },
+      },
+      {
+        path: ERegisterStep.LifeTest,
+        component: Lifetest,
+        data: { step: ERegisterStep.LifeTest },
       },
     ],
   },

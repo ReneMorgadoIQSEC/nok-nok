@@ -1,0 +1,11 @@
+<div
+  class="life-test"
+  [class.life-test--idle]="borderState() === 'idle'"
+  [class.life-test--invalid]="borderState() === 'invalid'"
+  [class.life-test--valid]="borderState() === 'valid'"
+>
+  <div class="life-test__oval">
+    <video #video class="life-test__video" playsinline muted autoplay></video>
+  </div>
+  <canvas #processCanvas class="life-test__canvas" aria-hidden="true"></canvas>
+</div>

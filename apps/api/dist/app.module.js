@@ -13,6 +13,10 @@ const node_fs_1 = require("node:fs");
 const node_path_1 = require("node:path");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const auth_controller_1 = require("./auth/auth.controller");
+const auth_service_1 = require("./auth/auth.service");
+const facial_controller_1 = require("./facial/facial.controller");
+const facial_service_1 = require("./facial/facial.service");
 const registration_controller_1 = require("./registration/registration.controller");
 const registration_service_1 = require("./registration/registration.service");
 const utilities_controller_1 = require("./utilities/utilities.controller");
@@ -44,12 +48,12 @@ exports.AppModule = AppModule = __decorate([
                 : [
                     serve_static_1.ServeStaticModule.forRoot({
                         rootPath: resolveAngularDist(),
-                        exclude: ['/api/(.*)'],
+                        exclude: ['/api/{*path}'],
                     }),
                 ]),
         ],
-        controllers: [app_controller_1.AppController, utilities_controller_1.UtilitiesController, registration_controller_1.RegistrationController],
-        providers: [app_service_1.AppService, utilities_service_1.UtilitiesService, registration_service_1.RegistrationService],
+        controllers: [app_controller_1.AppController, utilities_controller_1.UtilitiesController, registration_controller_1.RegistrationController, facial_controller_1.FacialController, auth_controller_1.AuthController],
+        providers: [app_service_1.AppService, utilities_service_1.UtilitiesService, registration_service_1.RegistrationService, facial_service_1.FacialService, auth_service_1.AuthService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
