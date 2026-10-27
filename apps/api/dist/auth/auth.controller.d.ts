@@ -12,6 +12,11 @@ export declare class AuthController {
         challenge?: unknown;
         identityId?: unknown;
     }): Promise<import("./auth.types").LoginResult>;
+    credentials(identityId?: unknown): Promise<import("./auth.types").LoginResult>;
+    deleteCredential(body: {
+        identityId?: unknown;
+        fidoCredentialId?: unknown;
+    }): Promise<import("./auth.types").LoginResult>;
     login(body: {
         identityId?: unknown;
         password?: unknown;

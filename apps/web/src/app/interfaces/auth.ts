@@ -2,6 +2,14 @@ const SESSION_KEY = 'nok-nok.session';
 
 export interface Session {
   token: string;
+  identityId: string;
+  email: string;
+}
+
+export interface StoredCredential {
+  identityId: string;
+  fidoCredentialId: string;
+  dateCreate: string;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -102,6 +110,34 @@ function isUserVerification(value: unknown): value is UserVerificationRequiremen
   return value === 'required' || value === 'preferred' || value === 'discouraged';
 }
 
+export function credentialsFromResult(payload: unknown): StoredCredential[] | null {
+  if (!isRecord(payload) || payload['success'] !== true || !isRecord(payload['data'])) {
+    return null;
+  }
+
+  const credentials = payload['data']['credentials'];
+  if (!Array.isArray(credentials)) {
+    return null;
+  }
+
+  return credentials.flatMap((item) => {
+    if (!isRecord(item)) {
+      return [];
+    }
+    const fidoCredentialId = readText(item, 'fidoCredentialId');
+    if (!fidoCredentialId) {
+      return [];
+    }
+    return [
+      {
+        identityId: readText(item, 'identityId') ?? '',
+        fidoCredentialId,
+        dateCreate: readText(item, 'dateCreate') ?? '',
+      },
+    ];
+  });
+}
+
 export function tokenFromResult(payload: unknown): string | null {
   if (!isRecord(payload) || payload['success'] !== true || !isRecord(payload['data'])) {
     return null;
@@ -123,7 +159,11 @@ export function readSession(): Session | null {
       return null;
     }
 
-    return { token: parsed['token'].trim() };
+    return {
+      token: parsed['token'].trim(),
+      identityId: typeof parsed['identityId'] === 'string' ? parsed['identityId'].trim() : '',
+      email: typeof parsed['email'] === 'string' ? parsed['email'].trim() : '',
+    };
   } catch {
     return null;
   }

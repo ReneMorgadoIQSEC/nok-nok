@@ -1,4 +1,8 @@
-<section>
-  <h1>Inicio</h1>
-  <button type="button" (click)="logout()">Cerrar sesión</button>
-</section>
+<main class="home">
+  <app-header (onMenuClick)="showNavbar.set($event)" />
+  @if (showNavbar()) {
+    <app-navbar />
+  }
+  <router-outlet />
+  <app-modal />
+</main>

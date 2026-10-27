@@ -13,8 +13,22 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly stateService = inject(StateService);
 
+  email = "";
+
   restore() {
-    this.stateService.setAuthenticated(this.hasSession());
+    const session = readSession();
+    this.stateService.setAuthenticated(!!session);
+    if (!session) {
+      return;
+    }
+
+    if (session.email) {
+      this.email = session.email;
+      this.stateService.setEmail(session.email);
+    }
+    if (session.identityId) {
+      this.stateService.setIdentity(session.identityId, this.stateService.state().deviceId);
+    }
   }
 
   hasSession(): boolean {
@@ -22,6 +36,7 @@ export class AuthService {
   }
 
   getIdentityByEmail(email: string) {
+    this.email = email;
     return this.http.get<UpstreamResult<Record<string, unknown>>>(`${environment.apiUrl}/auth/identity`, {
       params: { email },
     });
@@ -41,6 +56,19 @@ export class AuthService {
     );
   }
 
+  getCredentials(identityId: string) {
+    return this.http.get<UpstreamResult<Record<string, unknown>>>(`${environment.apiUrl}/auth/credentials`, {
+      params: { identityId },
+    });
+  }
+
+  deleteCredential(identityId: string, fidoCredentialId: string) {
+    return this.http.post<UpstreamResult<Record<string, unknown>>>(`${environment.apiUrl}/auth/credentials`, {
+      identityId,
+      fidoCredentialId,
+    });
+  }
+
   login(identityId: string, password: string) {
     return this.http.post<UpstreamResult<Record<string, unknown>>>(`${environment.apiUrl}/auth/login`, {
       identityId,
@@ -54,7 +82,13 @@ export class AuthService {
       return false;
     }
 
-    writeSession({ token });
+    const state = this.stateService.state();
+    writeSession({
+      token,
+      identityId: state.identityId,
+      email: state.email,
+    });
+    this.email = state.email;
     this.stateService.setAuthenticated(true);
     this.stateService.clearPassword();
     return true;

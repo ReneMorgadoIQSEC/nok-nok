@@ -3,7 +3,7 @@ import { authGuard } from './guards/auth-guard';
 import { guestGuard } from './guards/guest-guard';
 import { loginStepGuard } from './guards/login-step-guard';
 import { registerStepGuard } from './guards/register-step-guard';
-import { ELoginStep, ERegisterStep } from './interfaces/IState';
+import { EAuthenticatedPages, ELoginStep, ERegisterStep } from './interfaces/IState';
 import { Home } from './pages/home/home';
 import { LoginLayout } from './pages/login/login-layout/login-layout';
 import { LoginStart } from './pages/login/start/start';
@@ -13,6 +13,8 @@ import { RegisterVerificationCode } from './pages/register/verification-code/ver
 import { Passkey } from './pages/register/passkey/passkey';
 import { Lifetest } from './pages/register/lifetest/lifetest';
 import { Password } from './pages/login/password/password';
+import { Account } from './pages/account/account';
+import { Landing } from './pages/landing/landing';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -62,6 +64,24 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'home', component: Home, canActivate: [authGuard] },
+  {
+    path: 'home',
+    component: Home,
+    canActivate: [authGuard],
+    children: [
+      {
+        path: EAuthenticatedPages.Landing,
+        component: Landing,
+      },
+      {
+        path: EAuthenticatedPages.Account,
+        component: Account,
+      },
+      {
+        path: '**',
+        redirectTo: EAuthenticatedPages.Landing,
+      },
+    ],
+  },
   { path: '**', redirectTo: 'login' },
 ];

@@ -11,7 +11,9 @@ export enum ELoginStep {
 }
 
 export enum EAuthenticatedPages {
-  Home = 'home',
+  Home = "home",
+  Account = 'account',
+  Landing = 'landing',
 }
 
 export const REGISTER_STEPS: readonly ERegisterStep[] = [

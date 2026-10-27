@@ -1,0 +1,39 @@
+.navbar {
+    width: 100%;
+    max-width: 247px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $spacing_lg;
+    position: fixed;
+    background-color: $color_white;
+    border-right: 1px solid $color_gray_25;
+    padding: $spacing_lg;
+    height: calc(100vh - 104px);
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing_lg;
+    }
+    &__item {
+        list-style: none;
+    }
+    &__link {
+        text-decoration: none;
+        @include typography(semibold_b1);
+        color: $color_gray_75;
+        &--active {
+            color: $color_blue_50;
+        }
+    }
+    &__logout {
+        @include typography(semibold_b1);
+        color: $color_red_50;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+}

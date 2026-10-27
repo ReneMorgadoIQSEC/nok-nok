@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ELoginStep, ERegisterStep } from '../../../interfaces/IState';
 import { StepIndicator } from '../../../components/step-indicator/step-indicator';
 import { StateService } from '../../../services/state';
@@ -7,7 +7,7 @@ import { Modal } from '../../../components/modal/modal';
 
 @Component({
   selector: 'app-register-layout',
-  imports: [RouterLink, RouterOutlet, StepIndicator, Modal],
+  imports: [RouterOutlet, StepIndicator, Modal],
   templateUrl: './register-layout.html',
 })
 export class RegisterLayout {

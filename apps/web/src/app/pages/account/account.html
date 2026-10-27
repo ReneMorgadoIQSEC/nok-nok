@@ -1,0 +1,22 @@
+<section class="account">
+  <h1 class="account__title">Métodos de inicio de sesión</h1>
+  <ul class="account__list">
+    <li class="account__card">
+      <div class="account__method">
+        <img src="images/passkey.svg" alt="" class="account__icon">
+        <span class="account__name">Passkey</span>
+      </div>
+      <button
+        type="button"
+        class="account__switch"
+        role="switch"
+        aria-label="Passkey"
+        [attr.aria-checked]="passkeyEnabled()"
+        [disabled]="loading() || busy()"
+        (click)="onPasskeyToggle()"
+      >
+        <span class="account__switch-thumb"></span>
+      </button>
+    </li>
+  </ul>
+</section>

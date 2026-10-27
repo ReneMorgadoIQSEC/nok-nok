@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <ul class="navbar__list">
+        <li class="navbar__item">
+            <a [routerLinkActive]="['navbar__link--active']" routerLink="/home/landing" class="navbar__link">
+                Inicio
+            </a>
+        </li>
+        <li class="navbar__item">
+            <a [routerLinkActive]="['navbar__link--active']" routerLink="/home/account" class="navbar__link">
+                Cuenta
+            </a>
+        </li>
+    </ul>
+    <button class="navbar__logout" (click)="logout()">
+        Cerrar sesión
+    </button>
+</nav>

@@ -1,0 +1,15 @@
+<header class="header">
+    <div class="header__left">
+        <button class="header__menu" (click)="toggleNavbar()">
+            <img [src]="navbarVisible() ? 'images/close.svg' : 'images/menu.svg'" alt="Menu" class="header__menuIcon">
+        </button>
+        <a routerLink="/home" class="header__logoLink">
+            <img src="images/logo.png" alt="Logo" class="header__logo">
+        </a>
+    </div>
+    <div class="header__right">
+        <button class="header__userIcon">
+            {{ emailFirstLetter() }}
+        </button>
+    </div>
+</header>

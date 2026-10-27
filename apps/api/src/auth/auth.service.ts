@@ -1,7 +1,12 @@
 import { request as httpRequest } from 'node:http';
 import { request as httpsRequest } from 'node:https';
 import { BadGatewayException, Injectable, ServiceUnavailableException } from '@nestjs/common';
-import { LoginResult, PasskeyLoginOptionsInput, ValidatePasskeyInput } from './auth.types';
+import {
+  DeleteCredentialInput,
+  LoginResult,
+  PasskeyLoginOptionsInput,
+  ValidatePasskeyInput,
+} from './auth.types';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +24,14 @@ export class AuthService {
 
   validatePasskey(input: ValidatePasskeyInput): Promise<LoginResult> {
     return this.request('/Authentication/ValidatePassKey', 'POST', input);
+  }
+
+  getCredentials(identityId: string): Promise<LoginResult> {
+    return this.request(`/Authentication/GetCredentials/${encodeURIComponent(identityId)}`, 'GET');
+  }
+
+  deleteCredential(input: DeleteCredentialInput): Promise<LoginResult> {
+    return this.request('/Authentication/DeleteCredential', 'POST', input);
   }
 
   private request(path: string, method: 'GET' | 'POST', body?: unknown): Promise<LoginResult> {

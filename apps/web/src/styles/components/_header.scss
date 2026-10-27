@@ -1,0 +1,38 @@
+.header {
+    width: 100%;
+    padding: $spacing_lg $spacing_sm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $color_gray_25;
+    background-color: $color_white;
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: $spacing_sm;
+    }
+    &__logo {
+        width: 100%;
+        max-width: 160px;
+    }
+    &__menu {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    &__userIcon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background-color: $color_blue_50;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color_white;
+        @include typography(semibold_b1);
+        text-transform: uppercase;
+    }
+}

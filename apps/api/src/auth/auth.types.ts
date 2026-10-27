@@ -10,6 +10,11 @@ export interface PasskeyLoginOptionsInput {
   email: string;
 }
 
+export interface DeleteCredentialInput {
+  identityId: string;
+  fidoCredentialId: string;
+}
+
 export interface ValidatePasskeyInput {
   credential: {
     id: string;

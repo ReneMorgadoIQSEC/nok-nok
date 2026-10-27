@@ -23,6 +23,12 @@ let AuthService = class AuthService {
     validatePasskey(input) {
         return this.request('/Authentication/ValidatePassKey', 'POST', input);
     }
+    getCredentials(identityId) {
+        return this.request(`/Authentication/GetCredentials/${encodeURIComponent(identityId)}`, 'GET');
+    }
+    deleteCredential(input) {
+        return this.request('/Authentication/DeleteCredential', 'POST', input);
+    }
     request(path, method, body) {
         const baseUrl = process.env.UTILITIES_API_URL?.trim().replace(/\/$/, '');
         if (!baseUrl) {

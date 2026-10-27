@@ -30,6 +30,20 @@ export class AuthController {
     });
   }
 
+  @Get('credentials')
+  credentials(@Query('identityId') identityId?: unknown) {
+    return this.authService.getCredentials(this.requireText(identityId, 'La identidad es obligatoria'));
+  }
+
+  @Post('credentials')
+  @HttpCode(200)
+  deleteCredential(@Body() body: { identityId?: unknown; fidoCredentialId?: unknown }) {
+    return this.authService.deleteCredential({
+      identityId: this.requireText(body?.identityId, 'La identidad es obligatoria'),
+      fidoCredentialId: this.requireText(body?.fidoCredentialId, 'La credencial es obligatoria'),
+    });
+  }
+
   @Post('login')
   @HttpCode(200)
   login(@Body() body: { identityId?: unknown; password?: unknown }) {

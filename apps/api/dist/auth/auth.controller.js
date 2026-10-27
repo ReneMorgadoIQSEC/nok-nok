@@ -36,6 +36,15 @@ let AuthController = class AuthController {
             identityId: this.requireText(body?.identityId, 'La identidad es obligatoria'),
         });
     }
+    credentials(identityId) {
+        return this.authService.getCredentials(this.requireText(identityId, 'La identidad es obligatoria'));
+    }
+    deleteCredential(body) {
+        return this.authService.deleteCredential({
+            identityId: this.requireText(body?.identityId, 'La identidad es obligatoria'),
+            fidoCredentialId: this.requireText(body?.fidoCredentialId, 'La credencial es obligatoria'),
+        });
+    }
     login(body) {
         return this.authService.login(this.requireText(body?.identityId, 'La identidad es obligatoria'), this.requireSecret(body?.password, 'La contraseña es obligatoria'));
     }
@@ -96,6 +105,21 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "validatePasskey", null);
+__decorate([
+    (0, common_1.Get)('credentials'),
+    __param(0, (0, common_1.Query)('identityId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "credentials", null);
+__decorate([
+    (0, common_1.Post)('credentials'),
+    (0, common_1.HttpCode)(200),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "deleteCredential", null);
 __decorate([
     (0, common_1.Post)('login'),
     (0, common_1.HttpCode)(200),
